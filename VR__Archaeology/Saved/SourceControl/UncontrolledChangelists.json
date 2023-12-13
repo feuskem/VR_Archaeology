@@ -6,7 +6,18 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/StarterContent/Props/MaterialSphere.uasset",
-				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Maps/VRTemplateMap.umap"
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Maps/VRTemplateMap.umap",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/Actions/IA_MoveForward.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/Actions/IA_MoveHorizontal.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/IMC_Locomotion.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/Actions/IA_Sprint.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/PMI_VRTemplate.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/VRPawn.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/Actions/IA_Jump.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/Pistol.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/Grabbable_SmallCube.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/GrabComponent.uasset",
+				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/Projectile.uasset"
 			]
 		}
 	]
