@@ -5,6 +5,12 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Outline.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Level.umap",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Metal.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Shovel.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Material.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/shovel11.uasset",
 				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/StarterContent/Props/MaterialSphere.uasset",
 				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Maps/VRTemplateMap.umap",
 				"C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Input/Actions/IA_MoveForward.uasset",
