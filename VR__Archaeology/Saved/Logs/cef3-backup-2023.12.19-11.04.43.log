@@ -1,0 +1,5 @@
+[1219/140244.549:ERROR:cache_util_win.cc(20)] Unable to move the cache: Eriþim engellendi. (0x5)
+[1219/140244.549:ERROR:cache_util.cc(144)] Unable to move cache folder C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Cache to C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\old_Cache_000
+[1219/140244.549:ERROR:disk_cache.cc(184)] Unable to create cache
+[1219/140253.138:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[1219/140443.466:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
