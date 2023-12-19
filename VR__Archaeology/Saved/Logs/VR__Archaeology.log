@@ -1153,3 +1153,34 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2023.12.19-11.01.42:565][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
 [2023.12.19-11.01.42:570][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
 [2023.12.19-11.01.42:571][  0]LogSlate: The tab "TopRightModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:846][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/StarterContent.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:855][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_FirstPerson.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:863][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_FirstPersonBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:871][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_HandheldARBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:878][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_ThirdPerson.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:884][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_ThirdPersonBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:890][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_TopDown.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:898][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_TopDownBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:905][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_VehicleAdvBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.42:914][  0]LogPakFile: Display: Mounted Pak file 'C:/Program Files/Epic Games/UE_5.1/FeaturePacks/TP_VirtualRealityBP.upack', mount point: 'root:/'
+[2023.12.19-11.01.43:917][  0]LogCEFBrowser: CEF GPU acceleration enabled
+[2023.12.19-11.01.44:342][  0]LogTurnkeySupport: Turnkey Device: Win64@UGUR: (Name=UGUR, Type=Computer, Status=Valid, , Flags="Device_InstallSoftwareValid")
+[2023.12.19-11.01.44:366][  0]LogSlate: Took 0.000250 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2023.12.19-11.01.44:377][  0]LogSlate: Took 0.005233 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Italic.ttf' (157K)
+[2023.12.19-11.01.44:383][  0]LogSlate: Took 0.005439 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/DroidSansMono.ttf' (77K)
+[2023.12.19-11.01.44:406][  0]LogViewport: Scene viewport resized to 1466x894, mode Windowed.
+[2023.12.19-11.01.44:758][  0]LogStall: Startup...
+[2023.12.19-11.01.44:760][  0]LogStall: Startup complete.
+[2023.12.19-11.01.44:814][  0]LogLoad: (Engine Initialization) Total time: 15.24 seconds
+[2023.12.19-11.01.44:814][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2023.12.19-11.01.44:909][  0]LogAssetRegistry: Asset discovery search completed in 10.1588 seconds
+[2023.12.19-11.01.44:923][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000005 seconds (updated 0 objects)
+[2023.12.19-11.01.45:312][  0]LogContentStreaming: Texture pool size now 1000 MB
+[2023.12.19-11.01.45:364][  0]LogSlate: Took 0.000089 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2023.12.19-11.01.45:568][  1]LogNiagara: Compiling System NiagaraSystem /Game/VRTemplate/VFX/NS_MenuLaser.NS_MenuLaser took 3.311771 sec, no shader worker used.
+[2023.12.19-11.01.45:571][  1]LogNiagara: Compiling System NiagaraSystem /Game/VRTemplate/VFX/NS_PlayAreaBounds.NS_PlayAreaBounds took 3.306993 sec, no shader worker used.
+[2023.12.19-11.01.45:574][  1]LogNiagara: Compiling System NiagaraSystem /Game/VRTemplate/VFX/NS_TeleportRing.NS_TeleportRing took 3.304855 sec, no shader worker used.
+[2023.12.19-11.01.45:580][  1]LogNiagara: Compiling System NiagaraSystem /Game/VRTemplate/VFX/NS_TeleportTrace.NS_TeleportTrace took 3.300751 sec, no shader worker used.
+[2023.12.19-11.01.45:614][  1]LogResonanceAudio: Display: Resonance Audio Listener is initialized
+[2023.12.19-11.01.45:669][  2]LogSlate: Took 0.000494 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2023.12.19-11.01.45:882][  2]LogNavigationDataBuild: Navigation data generation finished for RecastNavMesh-Default (RecastNavMesh /Game/VRTemplate/Maps/VRTemplateMap.VRTemplateMap:PersistentLevel.RecastNavMesh-Default).
