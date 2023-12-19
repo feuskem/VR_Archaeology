@@ -997,3 +997,159 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2023.12.19-11.01.35:461][  0]LogMeshReduction: No distributed automatic mesh merging module available
 [2023.12.19-11.01.35:461][  0]LogMeshMerging: No distributed automatic mesh merging module available
 [2023.12.19-11.01.35:570][  0]LogNetVersion: VR__Archaeology 1.0.0, NetCL: 23058290, EngineNetVer: 30, GameNetVer: 0 (Checksum: 1430460725)
+[2023.12.19-11.01.35:982][  0]LogUObjectArray: 20936 objects as part of root set at end of initial load.
+[2023.12.19-11.01.35:982][  0]LogUObjectAllocator: 5786376 out of 0 bytes used by permanent object pool.
+[2023.12.19-11.01.35:982][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2023.12.19-11.01.36:010][  0]LogSlate: Border
+[2023.12.19-11.01.36:010][  0]LogSlate: BreadcrumbButton
+[2023.12.19-11.01.36:010][  0]LogSlate: Brushes.Title
+[2023.12.19-11.01.36:010][  0]LogSlate: Default
+[2023.12.19-11.01.36:010][  0]LogSlate: Icons.Save
+[2023.12.19-11.01.36:010][  0]LogSlate: Icons.Toolbar.Settings
+[2023.12.19-11.01.36:010][  0]LogSlate: ListView
+[2023.12.19-11.01.36:010][  0]LogSlate: SoftwareCursor_CardinalCross
+[2023.12.19-11.01.36:010][  0]LogSlate: SoftwareCursor_Grab
+[2023.12.19-11.01.36:010][  0]LogSlate: TableView.DarkRow
+[2023.12.19-11.01.36:010][  0]LogSlate: TableView.Row
+[2023.12.19-11.01.36:010][  0]LogSlate: TreeView
+[2023.12.19-11.01.36:186][  0]LogTurnkeySupport: Completed device detection: Code = 0
+[2023.12.19-11.01.36:211][  0]LogNiagaraDebuggerClient: Niagara Debugger Client Initialized | Session: 3E671435489A3BB5CD461BB2663ADCA5 | Instance: 315B0BF24356A49421C870BAEE5D6A65 (UGUR-16632).
+[2023.12.19-11.01.36:418][  0]LogAudio: Display: Registering Engine Module Parameter Interfaces...
+[2023.12.19-11.01.36:440][  0]LogMetasoundEngine: MetaSound Engine Initialized
+[2023.12.19-11.01.36:745][  0]LogPython: Using Python 3.9.7
+[2023.12.19-11.01.37:485][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2023.12.19-11.01.37:490][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2023.12.19-11.01.37:492][  0]LogUdpMessaging: Display: Added local interface '192.168.1.251' to multicast group '230.0.0.1:6666'
+[2023.12.19-11.01.37:650][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2023.12.19-11.01.37:667][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2023.12.19-11.01.37:667][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2023.12.19-11.01.37:939][  0]LogTemp: OpenXR ignores max viewport resolution in editor to support full HMD resolutions.
+[2023.12.19-11.01.38:135][  0]LogOpenImageDenoise: OIDN starting up
+[2023.12.19-11.01.38:199][  0]SourceControl: Source control is disabled
+[2023.12.19-11.01.38:206][  0]SourceControl: Source control is disabled
+[2023.12.19-11.01.38:215][  0]SourceControl: Source control is disabled
+[2023.12.19-11.01.38:221][  0]LogUProjectInfo: Found projects:
+[2023.12.19-11.01.38:401][  0]LogCollectionManager: Loaded 0 collections in 0.002082 seconds
+[2023.12.19-11.01.38:403][  0]LogFileCache: Scanning file cache for directory 'C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/Collections/' took 0.00s
+[2023.12.19-11.01.38:404][  0]LogFileCache: Scanning file cache for directory 'C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Developers/strid/Collections/' took 0.00s
+[2023.12.19-11.01.38:406][  0]LogFileCache: Scanning file cache for directory 'C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Collections/' took 0.00s
+[2023.12.19-11.01.38:753][  0]LogEngine: Initializing Engine...
+[2023.12.19-11.01.38:759][  0]LogHMD: Failed to enumerate extensions. Please check that you have a valid OpenXR runtime installed.
+[2023.12.19-11.01.38:761][  0]LogStylusInput: Initializing StylusInput subsystem.
+[2023.12.19-11.01.38:764][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
+[2023.12.19-11.01.38:765][  0]LogMaterial: Display: Missing cached shadermap for WireframeMaterial in PCD3D_SM6, Default, SM6 (DDC key hash: 4B647B95FD4132AFE2B95766B8E099300B8F1D05), compiling. Is special engine material.
+[2023.12.19-11.01.38:768][  0]LogMaterial: Display: Missing cached shadermap for LevelColorationLitMaterial in PCD3D_SM6, Default, SM6 (DDC key hash: E09B5E687CB78D91E01782197FB7FB80D07CB00A), compiling. Is special engine material.
+[2023.12.19-11.01.38:770][  0]LogMaterial: Display: Missing cached shadermap for LevelColorationUnlitMaterial in PCD3D_SM6, Default, SM6 (DDC key hash: 32887DDABF102010B2494880B0AD2420574B4FC5), compiling. Is special engine material.
+[2023.12.19-11.01.38:773][  0]LogMaterial: Display: Missing cached shadermap for MAT_LevelColorationLitLightmapUV in PCD3D_SM6, Default, SM6 (DDC key hash: 77153C20768AADCB87BE8B1EFDB65B5D6C1664FE), compiling. Is special engine material.
+[2023.12.19-11.01.38:776][  0]LogMaterial: Display: Missing cached shadermap for ShadedLevelColorationLitMaterial in PCD3D_SM6, Default, SM6 (DDC key hash: 607F2747F2806DC6D180C835E45F9F963145693B), compiling. Is special engine material.
+[2023.12.19-11.01.38:779][  0]LogMaterial: Display: Missing cached shadermap for ShadedLevelColorationUnlitMateri in PCD3D_SM6, Default, SM6 (DDC key hash: 5A82C481FDE60EDE223399D987E125C125C0CBF1), compiling. Is special engine material.
+[2023.12.19-11.01.38:853][  0]LogInit: Initializing FReadOnlyCVARCache
+[2023.12.19-11.01.38:866][  0]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.12.19-11.01.38:882][  0]LogAIModule: Creating AISystem for world Untitled
+[2023.12.19-11.01.38:883][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
+[2023.12.19-11.01.38:883][  0]LogInit: Texture streaming: Enabled
+[2023.12.19-11.01.38:904][  0]LogAnalytics: Display: [UEEditor.Rocket.Release] APIServer = https://datarouter.ol.epicgames.com/. AppVersion = 5.1.1-23901901+++UE5+Release-5.1
+[2023.12.19-11.01.38:912][  0]LogAudio: Display: Initializing Audio Device Manager...
+[2023.12.19-11.01.38:926][  0]LogAudio: Display: Loading Default Audio Settings Objects...
+[2023.12.19-11.01.38:927][  0]LogAudio: Display: No default SoundConcurrencyObject specified (or failed to load).
+[2023.12.19-11.01.38:928][  0]LogAudio: Display: AudioInfo: 'BINKA' Registered
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: AudioInfo: 'PCM' Registered
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: AudioInfo: 'ADPCM' Registered
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: AudioInfo: 'OGG' Registered
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: AudioInfo: 'OPUS' Registered
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: Audio Device Manager Initialized
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: Creating Audio Device:                 Id: 1, Scope: Shared, Realtime: True
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Max Channels (voices):				  0
+[2023.12.19-11.01.38:930][  0]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: AudioDevice MaxSources: 32
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: Audio Spatialization Plugin: Resonance Audio is external send: 1
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: Audio Reverb Plugin: Resonance Audio
+[2023.12.19-11.01.38:930][  0]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2023.12.19-11.01.38:937][  0]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2023.12.19-11.01.38:971][  0]LogAudioMixer: Display: Using Audio Hardware Device Hoparlör (Realtek(R) Audio)
+[2023.12.19-11.01.38:972][  0]LogAudioMixer: Display: Initializing Sound Submixes...
+[2023.12.19-11.01.38:974][  0]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2023.12.19-11.01.38:974][  0]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2023.12.19-11.01.38:983][  0]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=1
+[2023.12.19-11.01.38:983][  0]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=1
+[2023.12.19-11.01.38:984][  0]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=1
+[2023.12.19-11.01.38:984][  0]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=1
+[2023.12.19-11.01.38:984][  0]LogInit: FAudioDevice initialized.
+[2023.12.19-11.01.38:984][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'Untitled'.
+[2023.12.19-11.01.38:997][  0]LogCsvProfiler: Display: Metadata set : largeworldcoordinates="1"
+[2023.12.19-11.01.39:004][  0]LogLiveCoding: Display: Starting LiveCoding
+[2023.12.19-11.01.39:004][  0]LogLiveCoding: Display: LiveCodingConsole Arguments: UnrealEditor Win64 Development
+[2023.12.19-11.01.39:005][  0]LogLiveCoding: Display: First instance in process group "UE_VR__Archaeology_0x42f6dc32", spawning console
+[2023.12.19-11.01.39:010][  0]LogLiveCoding: Display: Waiting for server
+[2023.12.19-11.01.39:649][  0]LogLiveCoding: Display: Successfully initialized, removing startup thread
+[2023.12.19-11.01.39:694][  0]LogInit: Transaction tracking system initialized
+[2023.12.19-11.01.39:733][  0]LogSourceControl: Display: Uncontrolled Changelist persistency file loaded ../../../../../../Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/SourceControl/UncontrolledChangelists.json
+[2023.12.19-11.01.39:733][  0]LogSourceControl: Uncontrolled asset enumeration started...
+[2023.12.19-11.01.39:741][  0]LogSourceControl: Uncontrolled asset enumeration finished in 0.007931 seconds (Found 141 uncontrolled assets)
+[2023.12.19-11.01.39:766][  0]BlueprintLog: New page: Editor Load
+[2023.12.19-11.01.39:901][  0]LocalizationService: Localization service is disabled
+[2023.12.19-11.01.39:933][  0]TimingProfiler: Initialize
+[2023.12.19-11.01.39:933][  0]TimingProfiler: OnSessionChanged
+[2023.12.19-11.01.39:933][  0]LoadingProfiler: Initialize
+[2023.12.19-11.01.39:933][  0]LoadingProfiler: OnSessionChanged
+[2023.12.19-11.01.39:933][  0]NetworkingProfiler: Initialize
+[2023.12.19-11.01.39:933][  0]NetworkingProfiler: OnSessionChanged
+[2023.12.19-11.01.39:933][  0]MemoryProfiler: Initialize
+[2023.12.19-11.01.39:933][  0]MemoryProfiler: OnSessionChanged
+[2023.12.19-11.01.40:210][  0]LogFileCache: Scanning file cache for directory 'C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/' took 0.01s
+[2023.12.19-11.01.40:283][  0]LogEditorDomain: Display: Class /Script/AnimationData.AnimationSequencerDataModel is imported by a package but does not exist in memory. EditorDomain keys for packages using it will be invalid if it still exists.
+	To clear this message, resave packages that use the deleted class, or load its module earlier than the packages that use it are referenced.
+[2023.12.19-11.01.40:445][  0]LogLevelSequenceEditor: LevelSequenceEditor subsystem initialized.
+[2023.12.19-11.01.40:505][  0]LogInit: Display: Engine is initialized. Leaving FEngineLoop::Init()
+[2023.12.19-11.01.40:507][  0]SourceControl: Source control is disabled
+[2023.12.19-11.01.40:507][  0]LogUnrealEdMisc: Loading editor; pre map load, took 10.931
+[2023.12.19-11.01.40:507][  0]Cmd: MAP LOAD FILE="../../../../../../Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Maps/VRTemplateMap.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=4
+[2023.12.19-11.01.40:512][  0]LightingResults: New page: Lighting Build
+[2023.12.19-11.01.40:517][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
+[2023.12.19-11.01.40:517][  0]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.12.19-11.01.40:517][  0]MapCheck: New page: Map Check
+[2023.12.19-11.01.40:517][  0]LightingResults: New page: Lighting Build
+[2023.12.19-11.01.40:523][  0]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2023.12.19-11.01.40:526][  0]LogUObjectHash: Compacting FUObjectHashTables data took   0.43ms
+[2023.12.19-11.01.42:287][  0]LogAudio: Display: Audio Device (ID: 1) registered with world 'VRTemplateMap'.
+[2023.12.19-11.01.42:287][  0]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.12.19-11.01.42:287][  0]LogAIModule: Creating AISystem for world VRTemplateMap
+[2023.12.19-11.01.42:310][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2023.12.19-11.01.42:354][  0]LogRenderer: Warning: Deprecated CVar r.BasePassOutputsVelocity is set to 0. Remove and use r.VelocityOutputPass instead.
+[2023.12.19-11.01.42:355][  0]LogRenderer: Warning: Deprecated CVar r.VertexDeformationOutputsVelocity is set to 0. Remove and use r.Velocity.EnableVertexDeformation instead.
+[2023.12.19-11.01.42:426][  0]LogUObjectHash: Compacting FUObjectHashTables data took   0.69ms
+[2023.12.19-11.01.42:427][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2023.12.19-11.01.42:427][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.199ms to complete.
+[2023.12.19-11.01.42:427][  0]LogFileHelpers: Loading map 'VRTemplateMap' took 1.921
+[2023.12.19-11.01.42:443][  0]LogUnrealEdMisc: Total Editor Startup Time, took 12.867
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: ================================================
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: Total job queries 10, among them cache hits 0 (0.00%)
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: Tracking 10 distinct input hashes that result in 10 distinct outputs (100.00%)
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: RAM used: 0.09 MB (0.00 GB) of 1638.40 MB (1.60 GB) budget. Usage: 0.01%
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: Shaders Compiled: 0
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: Jobs assigned 0, completed 0 (0.00%)
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 0.00 s
+[2023.12.19-11.01.42:443][  0]LogShaderCompilers: Display: ================================================
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "VerticalModeToolbar" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "VerticalModeToolbar" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "VerticalModeToolbar" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "VerticalModeToolbar" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "TopLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:534][  0]LogSlate: The tab "BottomLeftModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
+[2023.12.19-11.01.42:555][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2023.12.19-11.01.42:561][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2023.12.19-11.01.42:565][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2023.12.19-11.01.42:570][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2023.12.19-11.01.42:571][  0]LogSlate: The tab "TopRightModeTab" attempted to spawn in layout 'LevelEditor_Layout_v1.8' but failed for some reason. It will not be displayed.
