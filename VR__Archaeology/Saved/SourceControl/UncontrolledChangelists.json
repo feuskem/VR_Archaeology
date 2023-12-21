@@ -5,6 +5,15 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Program Files/Epic Games/UE_5.1/Engine/Plugins/Marketplace/VoxelFree/Content/Examples/Shared/M_Shovel.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Outline.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Level.umap",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Metal.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Shovel.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Material.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/shovel11.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Blueprints/VRPawn.uasset",
+				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/VRTemplate/Maps/VRTemplateMap.umap",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Level.umap",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/_GENERATED/strid/Box_4AF4D4F5.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/_GENERATED/strid/Box_5845965C.uasset",
@@ -63,7 +72,6 @@
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/LUSH_StylizedEnvironmentSet/Landscape/MaterialLayers/M_Sand.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/LUSH_StylizedEnvironmentSet/Landscape/MaterialLayers/M_Grass.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Level_BuiltData.uasset",
-				"C:/Program Files/Epic Games/UE_5.1/Engine/Plugins/Marketplace/VoxelFree/Content/Examples/Shared/M_Shovel.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/LUSH_StylizedEnvironmentSet/Foliage/Trees/Materials/M_Bark_Base.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/LUSH_StylizedEnvironmentSet/_SharedAssets/Materials/M_Leaves_Base.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/LUSH_StylizedEnvironmentSet/_SharedAssets/Materials/M_Plants_Base.uasset",
@@ -114,15 +122,8 @@
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Assets/agac2.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Assets/agacdik.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Main.umap",
-				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/NewVoxelWorldSaveObject.uasset",
 				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Grass.uasset",
-				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/NewVoxelSpawnerConfig.uasset",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Outline.uasset",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/Level.umap",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Metal.uasset",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Shovel.uasset",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/Material.uasset",
-				"C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Content/Tools-Equipments/shovel11.uasset"
+				"C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Content/Maps/NewVoxelSpawnerConfig.uasset"
 			]
 		}
 	]
