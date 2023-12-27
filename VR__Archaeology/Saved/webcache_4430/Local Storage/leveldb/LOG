@@ -1,3 +1,5 @@
-2023/12/20-19:51:08.909 42d0 Reusing MANIFEST C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/MANIFEST-000001
-2023/12/20-19:51:08.911 42d0 Recovering log #3
-2023/12/20-19:51:08.912 42d0 Reusing old log C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/000003.log 
+2023/12/28-01:06:20.639 510 Creating DB C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb since it was missing.
+2023/12/28-01:06:20.646 510 Reusing MANIFEST C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/MANIFEST-000001
+2023/12/28-01:23:16.539 5294 Level-0 table #5: started
+2023/12/28-01:23:16.541 5294 Level-0 table #5: 17483 bytes OK
+2023/12/28-01:23:16.543 5294 Delete type=0 #3
