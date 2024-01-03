@@ -1,2 +1,16 @@
-[0101/230238.229:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0101/230433.885:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
+[0103/212504.421:ERROR:os_crypt_win.cc(93)] Failed to decrypt: Belirtilen durumda kullaným için anahtar geçerli deðil. (0x8009000B)
+[0103/212506.972:ERROR:backend_impl.cc(1041)] Critical error found -8
+[0103/212506.973:ERROR:entry_impl.cc(1075)] No file for c10308ce
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:ERROR:entry_impl.cc(1075)] No file for c10308d6
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.973:ERROR:entry_impl.cc(1075)] No file for c10304b2
+[0103/212506.974:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.974:WARNING:storage_block-inl.h(146)] Failed data load.
+[0103/212506.974:WARNING:storage_block-inl.h(146)] Failed data load.
