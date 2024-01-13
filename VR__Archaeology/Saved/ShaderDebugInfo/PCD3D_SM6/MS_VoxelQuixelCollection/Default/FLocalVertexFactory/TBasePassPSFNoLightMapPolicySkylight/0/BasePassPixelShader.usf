@@ -26627,6 +26627,6 @@ Material_Clamp_WorldGroupSettings, Material, 8, 91
 NULL, NULL, 0, 0
 #endif /*END_RESOURCE_TABLES*/
 #if 0 /*DIRECT COMPILE*/
--directcompile -format=PCD3D_SM6 -entry=MainPS -shaderPlatformName=PCD3D_SM6 -ps C:/Users/strid/OneDrive/Belgeler/GitHub/VR_Archaeology/VR__Archaeology/Saved/ShaderDebugInfo/PCD3D_SM6/MS_VoxelQuixelCollection/Default/FLocalVertexFactory/TBasePassPSFNoLightMapPolicySkylight/0/BasePassPixelShader.usf -cflags=4096 -nocrashreports
+-directcompile -format=PCD3D_SM6 -entry=MainPS -shaderPlatformName=PCD3D_SM6 -ps C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/ShaderDebugInfo/PCD3D_SM6/MS_VoxelQuixelCollection/Default/FLocalVertexFactory/TBasePassPSFNoLightMapPolicySkylight/0/BasePassPixelShader.usf -cflags=4096 -nocrashreports
 #endif /*DIRECT COMPILE*/
 //
