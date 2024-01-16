@@ -71,7 +71,7 @@
 // #define MOBILE_HIGH_QUALITY_BRDF 0
 // #define MOBILE_MULTI_VIEW 0
 // #define MULTI_VIEW 1
-// #define NEEDS_INSTANCE_LOCAL_TO_WORLD_PS 0
+// #define NEEDS_INSTANCE_LOCAL_TO_WORLD_PS 1
 // #define NEEDS_INSTANCE_WORLD_TO_LOCAL_PS 0
 // #define NEEDS_PARTICLE_COLOR 0
 // #define NEEDS_PARTICLE_LOCAL_TO_WORLD 0
@@ -15808,15 +15808,6 @@ float4 MaterialExpressionDBufferTextureLookup(float2 BufferUV, int DBufferTextur
 	return float4(0, 0, 0, 1);
 }
 #line 2665 "/Engine/Generated/Material.ush"
-FLWCVector2Deriv ConstructFLWCVector2Deriv(FLWCVector2 InValue,float2 InDdx,float2 InDdy)
-{
-	FLWCVector2Deriv Ret;
-	Ret.Value = InValue;
-	Ret.Ddx = InDdx;
-	Ret.Ddy = InDdy;
-	return Ret;
-}
-
 FLWCVector3Deriv ConstructFLWCVector3Deriv(FLWCVector3 InValue,float3 InDdx,float3 InDdy)
 {
 	FLWCVector3Deriv Ret;
@@ -15835,27 +15826,81 @@ FloatDeriv ConstructConstantFloatDeriv(float Value)
 	return Ret;
 }
 
-FLWCVector2Deriv Convert_FLWCVector2Deriv_FloatDeriv(FloatDeriv Src)
+FloatDeriv3 ConstructConstantFloatDeriv3(float3 Value)
 {
-	FLWCVector2Deriv Ret;
-	Ret.Value = LWCPromote((( float2 )Src.Value));
+	FloatDeriv3 Ret;
+	Ret.Value = Value;
+	Ret.Ddx = 0;
+	Ret.Ddy = 0;
+	return Ret;
+}
+
+FloatDeriv2 Convert_FloatDeriv2_FloatDeriv(FloatDeriv Src)
+{
+	FloatDeriv2 Ret;
+	Ret.Value = (( float2 )Src.Value);
 	Ret.Ddx = (( float2 )Src.Ddx);
 	Ret.Ddy = (( float2 )Src.Ddy);
 	return Ret;
 }
 
-FLWCVector3Deriv Convert_FLWCVector3Deriv_FloatDeriv(FloatDeriv Src)
+FloatDeriv3 Convert_FloatDeriv3_FloatDeriv(FloatDeriv Src)
 {
-	FLWCVector3Deriv Ret;
-	Ret.Value = LWCPromote((( float3 )Src.Value));
+	FloatDeriv3 Ret;
+	Ret.Value = (( float3 )Src.Value);
 	Ret.Ddx = (( float3 )Src.Ddx);
 	Ret.Ddy = (( float3 )Src.Ddy);
+	return Ret;
+}
+
+FloatDeriv ExtractFloatDeriv3_1(FloatDeriv3 InValue)
+{
+	FloatDeriv Ret;
+	Ret.Value = InValue.Value.x;
+	Ret.Ddx = InValue.Ddx.x;
+	Ret.Ddy = InValue.Ddy.x;
+	return Ret;
+}
+
+FloatDeriv ExtractFloatDeriv3_2(FloatDeriv3 InValue)
+{
+	FloatDeriv Ret;
+	Ret.Value = InValue.Value.y;
+	Ret.Ddx = InValue.Ddx.y;
+	Ret.Ddy = InValue.Ddy.y;
+	return Ret;
+}
+
+FloatDeriv ExtractFloatDeriv3_3(FloatDeriv3 InValue)
+{
+	FloatDeriv Ret;
+	Ret.Value = InValue.Value.z;
+	Ret.Ddx = InValue.Ddx.z;
+	Ret.Ddy = InValue.Ddy.z;
+	return Ret;
+}
+
+FloatDeriv AddDeriv(FloatDeriv A, FloatDeriv B)
+{
+	FloatDeriv Ret;
+	Ret.Value = A.Value + B.Value;
+	Ret.Ddx = A.Ddx + B.Ddx;
+	Ret.Ddy = A.Ddy + B.Ddy;
 	return Ret;
 }
 
 FloatDeriv SubDeriv(FloatDeriv A, FloatDeriv B)
 {
 	FloatDeriv Ret;
+	Ret.Value = A.Value - B.Value;
+	Ret.Ddx = A.Ddx - B.Ddx;
+	Ret.Ddy = A.Ddy - B.Ddy;
+	return Ret;
+}
+
+FloatDeriv3 SubDeriv(FloatDeriv3 A, FloatDeriv3 B)
+{
+	FloatDeriv3 Ret;
 	Ret.Value = A.Value - B.Value;
 	Ret.Ddx = A.Ddx - B.Ddx;
 	Ret.Ddy = A.Ddy - B.Ddy;
@@ -15871,21 +15916,40 @@ FloatDeriv MulDeriv(FloatDeriv A, FloatDeriv B)
 	return Ret;
 }
 
-FLWCVector2Deriv MulDerivLWC(FLWCVector2Deriv A, FLWCVector2Deriv B)
+FloatDeriv2 MulDeriv(FloatDeriv2 A, FloatDeriv2 B)
 {
-	FLWCVector2Deriv Ret;
-	Ret.Value = LWCMultiply(A.Value, B.Value);
-	Ret.Ddx = A.Ddx * LWCToFloat(B.Value) + LWCToFloat(A.Value) * B.Ddx;
-	Ret.Ddy = A.Ddy * LWCToFloat(B.Value) + LWCToFloat(A.Value) * B.Ddy;
+	FloatDeriv2 Ret;
+	Ret.Value = A.Value * B.Value;
+	Ret.Ddx = A.Ddx * B.Value + A.Value * B.Ddx;
+	Ret.Ddy = A.Ddy * B.Value + A.Value * B.Ddy;
 	return Ret;
 }
 
-FLWCVector3Deriv MulDerivLWC(FLWCVector3Deriv A, FLWCVector3Deriv B)
+FloatDeriv3 MulDeriv(FloatDeriv3 A, FloatDeriv3 B)
 {
-	FLWCVector3Deriv Ret;
-	Ret.Value = LWCMultiply(A.Value, B.Value);
-	Ret.Ddx = A.Ddx * LWCToFloat(B.Value) + LWCToFloat(A.Value) * B.Ddx;
-	Ret.Ddy = A.Ddy * LWCToFloat(B.Value) + LWCToFloat(A.Value) * B.Ddy;
+	FloatDeriv3 Ret;
+	Ret.Value = A.Value * B.Value;
+	Ret.Ddx = A.Ddx * B.Value + A.Value * B.Ddx;
+	Ret.Ddy = A.Ddy * B.Value + A.Value * B.Ddy;
+	return Ret;
+}
+
+FloatDeriv DotDeriv(FloatDeriv3 A, FloatDeriv3 B)
+{
+	FloatDeriv Ret = ConstructConstantFloatDeriv(0);
+	Ret = AddDeriv(Ret,MulDeriv(ExtractFloatDeriv3_1(A),ExtractFloatDeriv3_1(B)));
+	Ret = AddDeriv(Ret,MulDeriv(ExtractFloatDeriv3_2(A),ExtractFloatDeriv3_2(B)));
+	Ret = AddDeriv(Ret,MulDeriv(ExtractFloatDeriv3_3(A),ExtractFloatDeriv3_3(B)));
+	return Ret;
+}
+
+FloatDeriv SqrtDeriv(FloatDeriv A)
+{
+	FloatDeriv Ret;
+	Ret.Value = sqrt(A.Value);
+	float dFdA = 0.5f * rsqrt(max(A.Value, 0.00001f));
+	Ret.Ddx = dFdA * A.Ddx;
+	Ret.Ddy = dFdA * A.Ddy;
 	return Ret;
 }
 
@@ -15900,11 +15964,21 @@ FloatDeriv SaturateDeriv(FloatDeriv A)
 	return Ret;
 }
 
+FloatDeriv LengthDeriv(FloatDeriv3 A)
+{
+	FloatDeriv Ret;
+	Ret.Value = length(A.Value);
+	FloatDeriv Deriv = SqrtDeriv(DotDeriv(A,A));
+	Ret.Ddx = Deriv.Ddx;
+	Ret.Ddy = Deriv.Ddy;
+	return Ret;
+}
+
 float  CustomExpression0(FMaterialPixelParameters Parameters, float2  p)
 {
 return Mod( ((uint)(p.x) + 2 * (uint)(p.y)) , 5 );
 }
-#line 2839 "/Engine/Generated/Material.ush"
+#line 2913 "/Engine/Generated/Material.ush"
 float3  GetMaterialNormalRaw(FPixelMaterialInputs PixelMaterialInputs)
 {
 	return PixelMaterialInputs.Normal;
@@ -16004,7 +16078,7 @@ float  GetMaterialRoughnessRaw(FPixelMaterialInputs PixelMaterialInputs)
 
 float  GetMaterialRoughness(FPixelMaterialInputs PixelMaterialInputs)
 {
-#line 2941 "/Engine/Generated/Material.ush"
+#line 3015 "/Engine/Generated/Material.ush"
 	float  Roughness = saturate(GetMaterialRoughnessRaw(PixelMaterialInputs));
 
 
@@ -16098,10 +16172,10 @@ float  GetMaterialOpacity(FPixelMaterialInputs PixelMaterialInputs)
 
 	return saturate(GetMaterialOpacityRaw(PixelMaterialInputs));
 }
-#line 3042 "/Engine/Generated/Material.ush"
+#line 3116 "/Engine/Generated/Material.ush"
 float3 GetMaterialWorldPositionOffset(FMaterialVertexParameters Parameters)
 {
-#line 3060 "/Engine/Generated/Material.ush"
+#line 3134 "/Engine/Generated/Material.ush"
 	if ((GetPrimitiveData(Parameters).Flags &  0x1000000 ) == 0)
 	{
 		return float3(0, 0, 0);
@@ -16112,7 +16186,7 @@ float3 GetMaterialWorldPositionOffset(FMaterialVertexParameters Parameters)
 
 float3 GetMaterialPreviousWorldPositionOffset(FMaterialVertexParameters Parameters)
 {
-#line 3086 "/Engine/Generated/Material.ush"
+#line 3160 "/Engine/Generated/Material.ush"
 	if ((GetPrimitiveData(Parameters).Flags &  0x1000000 ) == 0)
 	{
 		return float3(0, 0, 0);
@@ -16179,7 +16253,7 @@ float GetMaterialPixelDepthOffset(FPixelMaterialInputs PixelMaterialInputs)
 {
 	return PixelMaterialInputs.PixelDepthOffset;
 }
-#line 3170 "/Engine/Generated/Material.ush"
+#line 3244 "/Engine/Generated/Material.ush"
 float3 TransformTangentNormalToWorld( float3x3  TangentToWorld, float3 TangentNormal)
 {
 	return normalize(float3(TransformTangentVectorToWorld(TangentToWorld, TangentNormal)));
@@ -16190,9 +16264,9 @@ float3 TransformTangentNormalToWorld( float3x3  TangentToWorld, float3 TangentNo
 float3 CalculateAnisotropyTangent(in out FMaterialPixelParameters Parameters, FPixelMaterialInputs PixelMaterialInputs)
 {
 	float3 Normal = Parameters.WorldNormal;
-#line 3188 "/Engine/Generated/Material.ush"
+#line 3262 "/Engine/Generated/Material.ush"
 	float3 Tangent = GetMaterialTangent(PixelMaterialInputs);
-#line 3194 "/Engine/Generated/Material.ush"
+#line 3268 "/Engine/Generated/Material.ush"
 	float3 BiTangent = cross(Normal, Tangent);
 	Tangent = normalize(cross(BiTangent, Normal));
 
@@ -16208,420 +16282,420 @@ float3 CalculateAnisotropyTangent(in out FMaterialPixelParameters Parameters, FP
 void CalcPixelMaterialInputs(in out FMaterialPixelParameters Parameters, in out FPixelMaterialInputs PixelMaterialInputs)
 {
 
-	float3  Local0 = normalize(Parameters.TangentToWorld[2]);
-	float3  Local1 = cross(Local0,normalize( float3 (0.00000000,0.00000000,1.00000000)));
-	float  Local2 = dot(Local1,Local1);
-	float3  Local3 = normalize(Local1);
-	float4  Local4 = ((abs(Local2 - 0.00000100) > 0.00001000) ? ((Local2 >= 0.00000100) ?  float4 (Local3,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
-	FLWCVector3 Local5 = GetWorldPosition(Parameters);
-	FLWCVector3 Local6 = LWCMultiply( Local5 , LWCPromote((( float3 )Material.PreshaderBuffer[1].w)));
-	FLWCVector2 Local7 = MakeLWCVector( LWCGetComponent( Local6 , 0) ,  LWCGetComponent( Local6 , 2) );
-	FLWCVector2 Local8 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[2].y)));
-	float2  Local9 = LWCApplyAddressMode( Local8 ,  1u ,  1u );
-	float  Local10 =  1.0f ;
-	float4  Local11 = UnpackNormalMap(Texture2DSample(Material.Texture2D_0,GetMaterialSharedSampler(Material.Texture2D_0Sampler,View.MaterialTextureBilinearWrapedSampler),Local9));
-	float  Local12 =  1.0f ;
-	float  Local13 = dot(Parameters.TangentToWorld[2], float3 (0.00000000,1.00000000,0.00000000));
-	float  Local14 = ((Local13 >= 0.00000000) ? -1.00000000 : 1.00000000);
-	float3  Local15 = (Local11.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local16 = MakeLWCVector( LWCGetComponent( Local6 , 1) ,  LWCGetComponent( Local6 , 2) );
-	FLWCVector2 Local17 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[2].y)));
-	float2  Local18 = LWCApplyAddressMode( Local17 ,  1u ,  1u );
-	float  Local19 =  1.0f ;
-	float4  Local20 = UnpackNormalMap(Texture2DSample(Material.Texture2D_0,GetMaterialSharedSampler(Material.Texture2D_0Sampler,View.MaterialTextureBilinearWrapedSampler),Local18));
-	float  Local21 =  1.0f ;
-	float  Local22 = dot(Parameters.TangentToWorld[2], float3 (1.00000000,0.00000000,0.00000000));
-	float  Local23 = ((Local22 >= 0.00000000) ? 1.00000000 : -1.00000000);
-	float3  Local24 = (Local20.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
-	float  Local25 = abs(Parameters.TangentToWorld[2].r);
-	float  Local26 = lerp(Material.PreshaderBuffer[3].x,Material.PreshaderBuffer[2].w,Local25);
-	float  Local27 = saturate(Local26);
-	float  Local28 = abs(Parameters.TangentToWorld[2].b);
-	float  Local29 = lerp((0.00000000 - 0.00000000),(0.00000000 + 1.00000000),Local28);
-	float  Local30 = saturate(Local29);
-	float  Local31 = sign(Parameters.TangentToWorld[2].b);
-	float  Local32 = max(Local31,0.00000000);
-	float  Local33 =  1.0f ;
-	float4  Local34 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_1,GetMaterialSharedSampler(Material.Texture2D_1Sampler,View.MaterialTextureBilinearWrapedSampler),Local9));
+	float3  Local0 = LWCMultiplyVector(Parameters.TangentToWorld[2], GetPrimitiveData(Parameters).WorldToLocal);
+	float3  Local1 = normalize(Local0);
+	float3  Local2 = normalize(Local1);
+	float3  Local3 = cross(Local2,normalize( float3 (0.00000000,0.00000000,1.00000000)));
+	float  Local4 = dot(Local3,Local3);
+	float3  Local5 = normalize(Local3);
+	float4  Local6 = ((abs(Local4 - 0.00000100) > 0.00001000) ? ((Local4 >= 0.00000100) ?  float4 (Local5,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
+	float3  Local7 = LWCMultiplyVector( float3 (1.00000000,0.00000000,0.00000000), GetInstanceToWorld(Parameters));
+	float3  Local8 = ((( float3 )0.00000000) - Local7);
+	float  Local9 = length(Local8);
+	float3  Local10 = LWCMultiplyVector( float3 (0.00000000,1.00000000,0.00000000), GetInstanceToWorld(Parameters));
+	float3  Local11 = ((( float3 )0.00000000) - Local10);
+	float  Local12 = length(Local11);
+	float2  Local13 =  float2 ( Local9 , Local12 );
+	float3  Local14 = LWCMultiplyVector( float3 (0.00000000,0.00000000,1.00000000), GetInstanceToWorld(Parameters));
+	float3  Local15 = ((( float3 )0.00000000) - Local14);
+	float  Local16 = length(Local15);
+	float3  Local17 =  float3 ( Local13 , Local16 );
+	FLWCVector3 Local18 = GetWorldPosition(Parameters);
+	float3  Local19 = LWCToFloat( Local18 );
+	float3  Local20 = LWCMultiplyVector( Local19 , GetPrimitiveData(Parameters).WorldToLocal);
+	float3  Local21 = LWCMultiplyVector(LWCToFloat(GetActorWorldPosition(Parameters)), GetPrimitiveData(Parameters).WorldToLocal);
+	float3  Local22 = ( Local20  - Local21);
+	float3  Local23 = ( Local17  *  Local22 );
+	float3  Local24 = ( Local23  * (( float3 )Material.PreshaderBuffer[1].w));
+	float2  Local25 =  Local24 .rb;
+	float2  Local26 = ( Local25  * (( float2 )Material.PreshaderBuffer[2].y));
+	float  Local27 =  1.0f ;
+	float4  Local28 = UnpackNormalMap(Texture2DSample(Material.Texture2D_0,GetMaterialSharedSampler(Material.Texture2D_0Sampler,View.MaterialTextureBilinearWrapedSampler), Local26 ));
+	float  Local29 =  1.0f ;
+	float  Local30 = dot(Local1, float3 (0.00000000,1.00000000,0.00000000));
+	float  Local31 = ((Local30 >= 0.00000000) ? -1.00000000 : 1.00000000);
+	float3  Local32 = (Local28.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local33 =  Local24 .gb;
+	float2  Local34 = ( Local33  * (( float2 )Material.PreshaderBuffer[2].y));
 	float  Local35 =  1.0f ;
-	float  Local36 =  1.0f ;
-	float4  Local37 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_1,GetMaterialSharedSampler(Material.Texture2D_1Sampler,View.MaterialTextureBilinearWrapedSampler),Local18));
-	float  Local38 =  1.0f ;
-	float3  Local39 = lerp(Local34.rgb,Local37.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local40 = (1.00000000 -  float3 ( float2 (Local27.r,Local30.r),Local32).g);
-	float  Local41 = (Local39.r + Local40);
-	float  Local42 = (Local41 + 1.00000000);
-	float  Local43 = (2.00000000 *  float3 ( float2 (Local27.r,Local30.r),Local32).g);
-	FLWCVector2 Local44 = MakeLWCVector( LWCGetComponent( Local6 , 0) ,  LWCGetComponent( Local6 , 1) );
-	FLWCVector2 Local45 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[3].w)));
-	float2  Local46 = LWCApplyAddressMode( Local45 ,  1u ,  1u );
-	float  Local47 =  1.0f ;
-	float4  Local48 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_2,GetMaterialSharedSampler(Material.Texture2D_2Sampler,View.MaterialTextureBilinearWrapedSampler),Local46));
+	float4  Local36 = UnpackNormalMap(Texture2DSample(Material.Texture2D_0,GetMaterialSharedSampler(Material.Texture2D_0Sampler,View.MaterialTextureBilinearWrapedSampler), Local34 ));
+	float  Local37 =  1.0f ;
+	float  Local38 = dot(Local1, float3 (1.00000000,0.00000000,0.00000000));
+	float  Local39 = ((Local38 >= 0.00000000) ? 1.00000000 : -1.00000000);
+	float3  Local40 = (Local36.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
+	float  Local41 = abs(Local1.r);
+	float  Local42 = lerp(Material.PreshaderBuffer[3].x,Material.PreshaderBuffer[2].w,Local41);
+	float  Local43 = saturate(Local42);
+	float  Local44 = abs(Local1.b);
+	float  Local45 = lerp((0.00000000 - 0.00000000),(0.00000000 + 1.00000000),Local44);
+	float  Local46 = saturate(Local45);
+	float  Local47 = sign(Local1.b);
+	float  Local48 = max(Local47,0.00000000);
 	float  Local49 =  1.0f ;
-	float  Local50 = (Local43 + Local48.rgb.r);
-	float  Local51 = (Local42 - Local50);
-	float  Local52 = saturate(Local51);
-	float  Local53 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local52);
-	float  Local54 = saturate(Local53);
-	float  Local55 = (1.00000000 - Local54.r.r);
-	float3  Local56 = lerp(Local15,Local24, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local57 = (Local4.rgb * (( float3 )Local56.r));
-	float3  Local58 = cross(Local1,Local0);
-	float  Local59 = dot(Local58,Local58);
-	float3  Local60 = normalize(Local58);
-	float4  Local61 = ((abs(Local59 - 0.00000100) > 0.00001000) ? ((Local59 >= 0.00000100) ?  float4 (Local60,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
-	float3  Local62 = (Local61.rgb * (( float3 )Local56.g));
-	float3  Local63 = (Local57 + Local62);
-	float3  Local64 = (Local0 * (( float3 )Local56.b));
-	float3  Local65 = (Local64 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local66 = (Local63 + Local65);
-	float3  Local67 = cross(Local0,normalize( float3 (0.00000000,1.00000000,0.00000000)));
-	float  Local68 = dot(Local67,Local67);
-	float3  Local69 = normalize(Local67);
-	float4  Local70 = ((abs(Local68 - 0.00000100) > 0.00001000) ? ((Local68 >= 0.00000100) ?  float4 (Local69,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
-	float  Local71 =  1.0f ;
-	float4  Local72 = UnpackNormalMap(Texture2DSample(Material.Texture2D_3,GetMaterialSharedSampler(Material.Texture2D_3Sampler,View.MaterialTextureBilinearWrapedSampler),Local46));
-	float  Local73 =  1.0f ;
-	float  Local74 = dot(Parameters.TangentToWorld[2], float3 (0.00000000,0.00000000,1.00000000));
-	float  Local75 = ((Local74 >= 0.00000000) ? 1.00000000 : -1.00000000);
-	float3  Local76 = (Local72.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local77 = (Local70.rgb * (( float3 )Local76.r));
-	float3  Local78 = cross(Local67,Local0);
-	float  Local79 = dot(Local78,Local78);
-	float3  Local80 = normalize(Local78);
-	float4  Local81 = ((abs(Local79 - 0.00000100) > 0.00001000) ? ((Local79 >= 0.00000100) ?  float4 (Local80,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
-	float3  Local82 = (Local81.rgb * (( float3 )Local76.g));
-	float3  Local83 = (Local77 + Local82);
-	float3  Local84 = (Local0 * (( float3 )Local76.b));
-	float3  Local85 = (Local84 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local86 = (Local83 + Local85);
-	float3  Local87 = lerp(Local66,Local86, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	FLWCVector2 Local88 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[4].w)));
-	float2  Local89 = LWCApplyAddressMode( Local88 ,  1u ,  1u );
-	float  Local90 =  1.0f ;
-	float4  Local91 = UnpackNormalMap(Texture2DSample(Material.Texture2D_4,GetMaterialSharedSampler(Material.Texture2D_4Sampler,View.MaterialTextureBilinearWrapedSampler),Local89));
-	float  Local92 =  1.0f ;
-	float3  Local93 = (Local91.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local94 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[4].w)));
-	float2  Local95 = LWCApplyAddressMode( Local94 ,  1u ,  1u );
-	float  Local96 =  1.0f ;
-	float4  Local97 = UnpackNormalMap(Texture2DSample(Material.Texture2D_4,GetMaterialSharedSampler(Material.Texture2D_4Sampler,View.MaterialTextureBilinearWrapedSampler),Local95));
-	float  Local98 =  1.0f ;
-	float3  Local99 = (Local97.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
-	float  Local100 =  1.0f ;
-	float4  Local101 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_5,GetMaterialSharedSampler(Material.Texture2D_5Sampler,View.MaterialTextureBilinearWrapedSampler),Local89));
-	float  Local102 =  1.0f ;
-	float  Local103 =  1.0f ;
-	float4  Local104 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_5,GetMaterialSharedSampler(Material.Texture2D_5Sampler,View.MaterialTextureBilinearWrapedSampler),Local95));
-	float  Local105 =  1.0f ;
-	float3  Local106 = lerp(Local101.rgb,Local104.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local107 = (Local106.r + Local40);
-	float  Local108 = (Local107 + 1.00000000);
-	FLWCVector2 Local109 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[5].y)));
-	float2  Local110 = LWCApplyAddressMode( Local109 ,  1u ,  1u );
+	float4  Local50 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_1,GetMaterialSharedSampler(Material.Texture2D_1Sampler,View.MaterialTextureBilinearWrapedSampler), Local26 ));
+	float  Local51 =  1.0f ;
+	float  Local52 =  1.0f ;
+	float4  Local53 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_1,GetMaterialSharedSampler(Material.Texture2D_1Sampler,View.MaterialTextureBilinearWrapedSampler), Local34 ));
+	float  Local54 =  1.0f ;
+	float3  Local55 = lerp(Local50.rgb,Local53.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local56 = (1.00000000 -  float3 ( float2 (Local43.r,Local46.r),Local48).g);
+	float  Local57 = (Local55.r + Local56);
+	float  Local58 = (Local57 + 1.00000000);
+	float  Local59 = (2.00000000 *  float3 ( float2 (Local43.r,Local46.r),Local48).g);
+	float2  Local60 =  Local24 .rg;
+	float2  Local61 = ( Local60  * (( float2 )Material.PreshaderBuffer[3].w));
+	float  Local62 =  1.0f ;
+	float4  Local63 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_2,GetMaterialSharedSampler(Material.Texture2D_2Sampler,View.MaterialTextureBilinearWrapedSampler), Local61 ));
+	float  Local64 =  1.0f ;
+	float  Local65 = (Local59 + Local63.rgb.r);
+	float  Local66 = (Local58 - Local65);
+	float  Local67 = saturate(Local66);
+	float  Local68 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local67);
+	float  Local69 = saturate(Local68);
+	float  Local70 = (1.00000000 - Local69.r.r);
+	float3  Local71 = lerp(Local32,Local40, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local72 = (Local6.rgb * (( float3 )Local71.r));
+	float3  Local73 = cross(Local3,Local2);
+	float  Local74 = dot(Local73,Local73);
+	float3  Local75 = normalize(Local73);
+	float4  Local76 = ((abs(Local74 - 0.00000100) > 0.00001000) ? ((Local74 >= 0.00000100) ?  float4 (Local75,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
+	float3  Local77 = (Local76.rgb * (( float3 )Local71.g));
+	float3  Local78 = (Local72 + Local77);
+	float3  Local79 = (Local2 * (( float3 )Local71.b));
+	float3  Local80 = (Local79 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local81 = (Local78 + Local80);
+	float3  Local82 = cross(Local2,normalize( float3 (0.00000000,1.00000000,0.00000000)));
+	float  Local83 = dot(Local82,Local82);
+	float3  Local84 = normalize(Local82);
+	float4  Local85 = ((abs(Local83 - 0.00000100) > 0.00001000) ? ((Local83 >= 0.00000100) ?  float4 (Local84,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
+	float  Local86 =  1.0f ;
+	float4  Local87 = UnpackNormalMap(Texture2DSample(Material.Texture2D_3,GetMaterialSharedSampler(Material.Texture2D_3Sampler,View.MaterialTextureBilinearWrapedSampler), Local61 ));
+	float  Local88 =  1.0f ;
+	float  Local89 = dot(Local1, float3 (0.00000000,0.00000000,1.00000000));
+	float  Local90 = ((Local89 >= 0.00000000) ? 1.00000000 : -1.00000000);
+	float3  Local91 = (Local87.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local92 = (Local85.rgb * (( float3 )Local91.r));
+	float3  Local93 = cross(Local82,Local2);
+	float  Local94 = dot(Local93,Local93);
+	float3  Local95 = normalize(Local93);
+	float4  Local96 = ((abs(Local94 - 0.00000100) > 0.00001000) ? ((Local94 >= 0.00000100) ?  float4 (Local95,0.00000000) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000)) :  float4 ( float3 (0.00000000,0.00000000,0.00000000),1.00000000));
+	float3  Local97 = (Local96.rgb * (( float3 )Local91.g));
+	float3  Local98 = (Local92 + Local97);
+	float3  Local99 = (Local2 * (( float3 )Local91.b));
+	float3  Local100 = (Local99 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local101 = (Local98 + Local100);
+	float3  Local102 = lerp(Local81,Local101, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float2  Local103 = ( Local25  * (( float2 )Material.PreshaderBuffer[4].w));
+	float  Local104 =  1.0f ;
+	float4  Local105 = UnpackNormalMap(Texture2DSample(Material.Texture2D_4,GetMaterialSharedSampler(Material.Texture2D_4Sampler,View.MaterialTextureBilinearWrapedSampler), Local103 ));
+	float  Local106 =  1.0f ;
+	float3  Local107 = (Local105.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local108 = ( Local33  * (( float2 )Material.PreshaderBuffer[4].w));
+	float  Local109 =  1.0f ;
+	float4  Local110 = UnpackNormalMap(Texture2DSample(Material.Texture2D_4,GetMaterialSharedSampler(Material.Texture2D_4Sampler,View.MaterialTextureBilinearWrapedSampler), Local108 ));
 	float  Local111 =  1.0f ;
-	float4  Local112 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_6,GetMaterialSharedSampler(Material.Texture2D_6Sampler,View.MaterialTextureBilinearWrapedSampler),Local110));
+	float3  Local112 = (Local110.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
 	float  Local113 =  1.0f ;
-	float  Local114 = (Local43 + Local112.rgb.r);
-	float  Local115 = (Local108 - Local114);
-	float  Local116 = saturate(Local115);
-	float  Local117 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local116);
-	float  Local118 = saturate(Local117);
-	float  Local119 = (1.00000000 - Local118.r.r);
-	float3  Local120 = lerp(Local93,Local99, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local121 = (Local4.rgb * (( float3 )Local120.r));
-	float3  Local122 = (Local61.rgb * (( float3 )Local120.g));
-	float3  Local123 = (Local121 + Local122);
-	float3  Local124 = (Local0 * (( float3 )Local120.b));
-	float3  Local125 = (Local124 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local126 = (Local123 + Local125);
-	float  Local127 =  1.0f ;
-	float4  Local128 = UnpackNormalMap(Texture2DSample(Material.Texture2D_7,GetMaterialSharedSampler(Material.Texture2D_7Sampler,View.MaterialTextureBilinearWrapedSampler),Local110));
-	float  Local129 =  1.0f ;
-	float3  Local130 = (Local128.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local131 = (Local70.rgb * (( float3 )Local130.r));
-	float3  Local132 = (Local81.rgb * (( float3 )Local130.g));
-	float3  Local133 = (Local131 + Local132);
-	float3  Local134 = (Local0 * (( float3 )Local130.b));
-	float3  Local135 = (Local134 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local136 = (Local133 + Local135);
-	float3  Local137 = lerp(Local126,Local136, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local138 = lerp(Local39.r,Local48.rgb.r,Local55);
-	float4  Local139 = Parameters.VertexColor;
-	float  Local140 =  Local139 .r;
-	float  Local141 = (1.00000000 -  Local140 );
-	float  Local142 = (Local138 +  Local141 );
-	float  Local143 = (Local142 + 1.00000000);
-	float  Local144 = (2.00000000 *  Local140 );
-	float  Local145 = lerp(Local106.r,Local112.rgb.r,Local119);
-	float  Local146 = ( Local144  + Local145);
-	float  Local147 = (Local143 - Local146);
-	float  Local148 = saturate(Local147);
-	float  Local149 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local148);
-	float  Local150 = saturate(Local149);
-	float  Local151 = (1.00000000 - Local150.r.r);
-	float3  Local152 = lerp(Local87,Local137,Local151);
-	FLWCVector2 Local153 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[6].z)));
-	float2  Local154 = LWCApplyAddressMode( Local153 ,  1u ,  1u );
-	float  Local155 =  1.0f ;
-	float4  Local156 = UnpackNormalMap(Texture2DSample(Material.Texture2D_8,GetMaterialSharedSampler(Material.Texture2D_8Sampler,View.MaterialTextureBilinearWrapedSampler),Local154));
-	float  Local157 =  1.0f ;
-	float3  Local158 = (Local156.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local159 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[6].z)));
-	float2  Local160 = LWCApplyAddressMode( Local159 ,  1u ,  1u );
-	float  Local161 =  1.0f ;
-	float4  Local162 = UnpackNormalMap(Texture2DSample(Material.Texture2D_8,GetMaterialSharedSampler(Material.Texture2D_8Sampler,View.MaterialTextureBilinearWrapedSampler),Local160));
-	float  Local163 =  1.0f ;
-	float3  Local164 = (Local162.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
-	float  Local165 =  1.0f ;
-	float4  Local166 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_9,GetMaterialSharedSampler(Material.Texture2D_9Sampler,View.MaterialTextureBilinearWrapedSampler),Local154));
-	float  Local167 =  1.0f ;
+	float4  Local114 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_5,GetMaterialSharedSampler(Material.Texture2D_5Sampler,View.MaterialTextureBilinearWrapedSampler), Local103 ));
+	float  Local115 =  1.0f ;
+	float  Local116 =  1.0f ;
+	float4  Local117 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_5,GetMaterialSharedSampler(Material.Texture2D_5Sampler,View.MaterialTextureBilinearWrapedSampler), Local108 ));
+	float  Local118 =  1.0f ;
+	float3  Local119 = lerp(Local114.rgb,Local117.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local120 = (Local119.r + Local56);
+	float  Local121 = (Local120 + 1.00000000);
+	float2  Local122 = ( Local60  * (( float2 )Material.PreshaderBuffer[5].y));
+	float  Local123 =  1.0f ;
+	float4  Local124 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_6,GetMaterialSharedSampler(Material.Texture2D_6Sampler,View.MaterialTextureBilinearWrapedSampler), Local122 ));
+	float  Local125 =  1.0f ;
+	float  Local126 = (Local59 + Local124.rgb.r);
+	float  Local127 = (Local121 - Local126);
+	float  Local128 = saturate(Local127);
+	float  Local129 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local128);
+	float  Local130 = saturate(Local129);
+	float  Local131 = (1.00000000 - Local130.r.r);
+	float3  Local132 = lerp(Local107,Local112, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local133 = (Local6.rgb * (( float3 )Local132.r));
+	float3  Local134 = (Local76.rgb * (( float3 )Local132.g));
+	float3  Local135 = (Local133 + Local134);
+	float3  Local136 = (Local2 * (( float3 )Local132.b));
+	float3  Local137 = (Local136 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local138 = (Local135 + Local137);
+	float  Local139 =  1.0f ;
+	float4  Local140 = UnpackNormalMap(Texture2DSample(Material.Texture2D_7,GetMaterialSharedSampler(Material.Texture2D_7Sampler,View.MaterialTextureBilinearWrapedSampler), Local122 ));
+	float  Local141 =  1.0f ;
+	float3  Local142 = (Local140.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local143 = (Local85.rgb * (( float3 )Local142.r));
+	float3  Local144 = (Local96.rgb * (( float3 )Local142.g));
+	float3  Local145 = (Local143 + Local144);
+	float3  Local146 = (Local2 * (( float3 )Local142.b));
+	float3  Local147 = (Local146 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local148 = (Local145 + Local147);
+	float3  Local149 = lerp(Local138,Local148, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local150 = lerp(Local55.r,Local63.rgb.r,Local70);
+	float4  Local151 = Parameters.VertexColor;
+	float  Local152 =  Local151 .r;
+	float  Local153 = (1.00000000 -  Local152 );
+	float  Local154 = (Local150 +  Local153 );
+	float  Local155 = (Local154 + 1.00000000);
+	float  Local156 = (2.00000000 *  Local152 );
+	float  Local157 = lerp(Local119.r,Local124.rgb.r,Local131);
+	float  Local158 = ( Local156  + Local157);
+	float  Local159 = (Local155 - Local158);
+	float  Local160 = saturate(Local159);
+	float  Local161 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local160);
+	float  Local162 = saturate(Local161);
+	float  Local163 = (1.00000000 - Local162.r.r);
+	float3  Local164 = lerp(Local102,Local149,Local163);
+	float2  Local165 = ( Local25  * (( float2 )Material.PreshaderBuffer[6].z));
+	float  Local166 =  1.0f ;
+	float4  Local167 = UnpackNormalMap(Texture2DSample(Material.Texture2D_8,GetMaterialSharedSampler(Material.Texture2D_8Sampler,View.MaterialTextureBilinearWrapedSampler), Local165 ));
 	float  Local168 =  1.0f ;
-	float4  Local169 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_9,GetMaterialSharedSampler(Material.Texture2D_9Sampler,View.MaterialTextureBilinearWrapedSampler),Local160));
-	float  Local170 =  1.0f ;
-	float3  Local171 = lerp(Local166.rgb,Local169.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local172 = (Local171.r + Local40);
-	float  Local173 = (Local172 + 1.00000000);
-	FLWCVector2 Local174 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[7].x)));
-	float2  Local175 = LWCApplyAddressMode( Local174 ,  1u ,  1u );
-	float  Local176 =  1.0f ;
-	float4  Local177 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_10,GetMaterialSharedSampler(Material.Texture2D_10Sampler,View.MaterialTextureBilinearWrapedSampler),Local175));
+	float3  Local169 = (Local167.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local170 = ( Local33  * (( float2 )Material.PreshaderBuffer[6].z));
+	float  Local171 =  1.0f ;
+	float4  Local172 = UnpackNormalMap(Texture2DSample(Material.Texture2D_8,GetMaterialSharedSampler(Material.Texture2D_8Sampler,View.MaterialTextureBilinearWrapedSampler), Local170 ));
+	float  Local173 =  1.0f ;
+	float3  Local174 = (Local172.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
+	float  Local175 =  1.0f ;
+	float4  Local176 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_9,GetMaterialSharedSampler(Material.Texture2D_9Sampler,View.MaterialTextureBilinearWrapedSampler), Local165 ));
+	float  Local177 =  1.0f ;
 	float  Local178 =  1.0f ;
-	float  Local179 = (Local43 + Local177.rgb.r);
-	float  Local180 = (Local173 - Local179);
-	float  Local181 = saturate(Local180);
-	float  Local182 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local181);
-	float  Local183 = saturate(Local182);
-	float  Local184 = (1.00000000 - Local183.r.r);
-	float3  Local185 = lerp(Local158,Local164, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local186 = (Local4.rgb * (( float3 )Local185.r));
-	float3  Local187 = (Local61.rgb * (( float3 )Local185.g));
-	float3  Local188 = (Local186 + Local187);
-	float3  Local189 = (Local0 * (( float3 )Local185.b));
-	float3  Local190 = (Local189 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local191 = (Local188 + Local190);
-	float  Local192 =  1.0f ;
-	float4  Local193 = UnpackNormalMap(Texture2DSample(Material.Texture2D_11,GetMaterialSharedSampler(Material.Texture2D_11Sampler,View.MaterialTextureBilinearWrapedSampler),Local175));
-	float  Local194 =  1.0f ;
-	float3  Local195 = (Local193.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local196 = (Local70.rgb * (( float3 )Local195.r));
-	float3  Local197 = (Local81.rgb * (( float3 )Local195.g));
-	float3  Local198 = (Local196 + Local197);
-	float3  Local199 = (Local0 * (( float3 )Local195.b));
-	float3  Local200 = (Local199 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local201 = (Local198 + Local200);
-	float3  Local202 = lerp(Local191,Local201, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local203 = lerp(Local138,Local145,Local151);
-	float  Local204 =  Local139 .g;
-	float  Local205 = (1.00000000 -  Local204 );
-	float  Local206 = (Local203 +  Local205 );
-	float  Local207 = (Local206 + 1.00000000);
-	float  Local208 = (2.00000000 *  Local204 );
-	float  Local209 = lerp(Local171.r,Local177.rgb.r,Local184);
-	float  Local210 = ( Local208  + Local209);
-	float  Local211 = (Local207 - Local210);
-	float  Local212 = saturate(Local211);
-	float  Local213 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local212);
-	float  Local214 = saturate(Local213);
-	float  Local215 = (1.00000000 - Local214.r.r);
-	float3  Local216 = lerp(Local152,Local202,Local215);
-	FLWCVector2 Local217 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[7].z)));
-	float2  Local218 = LWCApplyAddressMode( Local217 ,  1u ,  1u );
-	float  Local219 =  1.0f ;
-	float4  Local220 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler),Local218));
-	float  Local221 =  1.0f ;
-	float3  Local222 = (Local220.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local223 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[7].z)));
-	float2  Local224 = LWCApplyAddressMode( Local223 ,  1u ,  1u );
-	float  Local225 =  1.0f ;
-	float4  Local226 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler),Local224));
+	float4  Local179 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_9,GetMaterialSharedSampler(Material.Texture2D_9Sampler,View.MaterialTextureBilinearWrapedSampler), Local170 ));
+	float  Local180 =  1.0f ;
+	float3  Local181 = lerp(Local176.rgb,Local179.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local182 = (Local181.r + Local56);
+	float  Local183 = (Local182 + 1.00000000);
+	float2  Local184 = ( Local60  * (( float2 )Material.PreshaderBuffer[7].x));
+	float  Local185 =  1.0f ;
+	float4  Local186 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_10,GetMaterialSharedSampler(Material.Texture2D_10Sampler,View.MaterialTextureBilinearWrapedSampler), Local184 ));
+	float  Local187 =  1.0f ;
+	float  Local188 = (Local59 + Local186.rgb.r);
+	float  Local189 = (Local183 - Local188);
+	float  Local190 = saturate(Local189);
+	float  Local191 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local190);
+	float  Local192 = saturate(Local191);
+	float  Local193 = (1.00000000 - Local192.r.r);
+	float3  Local194 = lerp(Local169,Local174, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local195 = (Local6.rgb * (( float3 )Local194.r));
+	float3  Local196 = (Local76.rgb * (( float3 )Local194.g));
+	float3  Local197 = (Local195 + Local196);
+	float3  Local198 = (Local2 * (( float3 )Local194.b));
+	float3  Local199 = (Local198 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local200 = (Local197 + Local199);
+	float  Local201 =  1.0f ;
+	float4  Local202 = UnpackNormalMap(Texture2DSample(Material.Texture2D_11,GetMaterialSharedSampler(Material.Texture2D_11Sampler,View.MaterialTextureBilinearWrapedSampler), Local184 ));
+	float  Local203 =  1.0f ;
+	float3  Local204 = (Local202.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local205 = (Local85.rgb * (( float3 )Local204.r));
+	float3  Local206 = (Local96.rgb * (( float3 )Local204.g));
+	float3  Local207 = (Local205 + Local206);
+	float3  Local208 = (Local2 * (( float3 )Local204.b));
+	float3  Local209 = (Local208 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local210 = (Local207 + Local209);
+	float3  Local211 = lerp(Local200,Local210, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local212 = lerp(Local150,Local157,Local163);
+	float  Local213 =  Local151 .g;
+	float  Local214 = (1.00000000 -  Local213 );
+	float  Local215 = (Local212 +  Local214 );
+	float  Local216 = (Local215 + 1.00000000);
+	float  Local217 = (2.00000000 *  Local213 );
+	float  Local218 = lerp(Local181.r,Local186.rgb.r,Local193);
+	float  Local219 = ( Local217  + Local218);
+	float  Local220 = (Local216 - Local219);
+	float  Local221 = saturate(Local220);
+	float  Local222 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local221);
+	float  Local223 = saturate(Local222);
+	float  Local224 = (1.00000000 - Local223.r.r);
+	float3  Local225 = lerp(Local164,Local211,Local224);
+	float2  Local226 = ( Local25  * (( float2 )Material.PreshaderBuffer[7].z));
 	float  Local227 =  1.0f ;
-	float3  Local228 = (Local226.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
+	float4  Local228 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler), Local226 ));
 	float  Local229 =  1.0f ;
-	float4  Local230 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler),Local218));
-	float  Local231 =  1.0f ;
+	float3  Local230 = (Local228.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local231 = ( Local33  * (( float2 )Material.PreshaderBuffer[7].z));
 	float  Local232 =  1.0f ;
-	float4  Local233 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler),Local224));
+	float4  Local233 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler), Local231 ));
 	float  Local234 =  1.0f ;
-	float3  Local235 = lerp(Local230.rgb,Local233.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local236 = (Local235.r + Local40);
-	float  Local237 = (Local236 + 1.00000000);
-	FLWCVector2 Local238 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[7].z)));
-	float2  Local239 = LWCApplyAddressMode( Local238 ,  1u ,  1u );
-	float  Local240 =  1.0f ;
-	float4  Local241 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler),Local239));
-	float  Local242 =  1.0f ;
-	float  Local243 = (Local43 + Local241.rgb.r);
-	float  Local244 = (Local237 - Local243);
-	float  Local245 = saturate(Local244);
-	float  Local246 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local245);
-	float  Local247 = saturate(Local246);
-	float  Local248 = (1.00000000 - Local247.r.r);
-	float3  Local249 = lerp(Local222,Local228, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local250 = (Local4.rgb * (( float3 )Local249.r));
-	float3  Local251 = (Local61.rgb * (( float3 )Local249.g));
-	float3  Local252 = (Local250 + Local251);
-	float3  Local253 = (Local0 * (( float3 )Local249.b));
-	float3  Local254 = (Local253 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local255 = (Local252 + Local254);
-	float  Local256 =  1.0f ;
-	float4  Local257 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler),Local239));
-	float  Local258 =  1.0f ;
-	float3  Local259 = (Local257.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local260 = (Local70.rgb * (( float3 )Local259.r));
-	float3  Local261 = (Local81.rgb * (( float3 )Local259.g));
-	float3  Local262 = (Local260 + Local261);
-	float3  Local263 = (Local0 * (( float3 )Local259.b));
-	float3  Local264 = (Local263 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local265 = (Local262 + Local264);
-	float3  Local266 = lerp(Local255,Local265, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local267 = lerp(Local203,Local209,Local215);
-	float  Local268 =  Local139 .b;
-	float  Local269 = (1.00000000 -  Local268 );
-	float  Local270 = (Local267 +  Local269 );
-	float  Local271 = (Local270 + 1.00000000);
-	float  Local272 = (2.00000000 *  Local268 );
-	float  Local273 = lerp(Local235.r,Local241.rgb.r,Local248);
-	float  Local274 = ( Local272  + Local273);
-	float  Local275 = (Local271 - Local274);
-	float  Local276 = saturate(Local275);
-	float  Local277 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local276);
-	float  Local278 = saturate(Local277);
-	float  Local279 = (1.00000000 - Local278.r.r);
-	float3  Local280 = lerp(Local216,Local266,Local279);
-	FLWCVector2 Local281 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[8].x)));
-	float2  Local282 = LWCApplyAddressMode( Local281 ,  1u ,  1u );
-	float  Local283 =  1.0f ;
-	float4  Local284 = UnpackNormalMap(Texture2DSample(Material.Texture2D_14,GetMaterialSharedSampler(Material.Texture2D_14Sampler,View.MaterialTextureBilinearWrapedSampler),Local282));
-	float  Local285 =  1.0f ;
-	float3  Local286 = (Local284.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local287 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[8].x)));
-	float2  Local288 = LWCApplyAddressMode( Local287 ,  1u ,  1u );
-	float  Local289 =  1.0f ;
-	float4  Local290 = UnpackNormalMap(Texture2DSample(Material.Texture2D_14,GetMaterialSharedSampler(Material.Texture2D_14Sampler,View.MaterialTextureBilinearWrapedSampler),Local288));
-	float  Local291 =  1.0f ;
-	float3  Local292 = (Local290.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
+	float3  Local235 = (Local233.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
+	float  Local236 =  1.0f ;
+	float4  Local237 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler), Local226 ));
+	float  Local238 =  1.0f ;
+	float  Local239 =  1.0f ;
+	float4  Local240 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler), Local231 ));
+	float  Local241 =  1.0f ;
+	float3  Local242 = lerp(Local237.rgb,Local240.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local243 = (Local242.r + Local56);
+	float  Local244 = (Local243 + 1.00000000);
+	float2  Local245 = ( Local60  * (( float2 )Material.PreshaderBuffer[7].z));
+	float  Local246 =  1.0f ;
+	float4  Local247 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_13,GetMaterialSharedSampler(Material.Texture2D_13Sampler,View.MaterialTextureBilinearWrapedSampler), Local245 ));
+	float  Local248 =  1.0f ;
+	float  Local249 = (Local59 + Local247.rgb.r);
+	float  Local250 = (Local244 - Local249);
+	float  Local251 = saturate(Local250);
+	float  Local252 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local251);
+	float  Local253 = saturate(Local252);
+	float  Local254 = (1.00000000 - Local253.r.r);
+	float3  Local255 = lerp(Local230,Local235, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local256 = (Local6.rgb * (( float3 )Local255.r));
+	float3  Local257 = (Local76.rgb * (( float3 )Local255.g));
+	float3  Local258 = (Local256 + Local257);
+	float3  Local259 = (Local2 * (( float3 )Local255.b));
+	float3  Local260 = (Local259 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local261 = (Local258 + Local260);
+	float  Local262 =  1.0f ;
+	float4  Local263 = UnpackNormalMap(Texture2DSample(Material.Texture2D_12,GetMaterialSharedSampler(Material.Texture2D_12Sampler,View.MaterialTextureBilinearWrapedSampler), Local245 ));
+	float  Local264 =  1.0f ;
+	float3  Local265 = (Local263.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local266 = (Local85.rgb * (( float3 )Local265.r));
+	float3  Local267 = (Local96.rgb * (( float3 )Local265.g));
+	float3  Local268 = (Local266 + Local267);
+	float3  Local269 = (Local2 * (( float3 )Local265.b));
+	float3  Local270 = (Local269 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local271 = (Local268 + Local270);
+	float3  Local272 = lerp(Local261,Local271, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local273 = lerp(Local212,Local218,Local224);
+	float  Local274 =  Local151 .b;
+	float  Local275 = (1.00000000 -  Local274 );
+	float  Local276 = (Local273 +  Local275 );
+	float  Local277 = (Local276 + 1.00000000);
+	float  Local278 = (2.00000000 *  Local274 );
+	float  Local279 = lerp(Local242.r,Local247.rgb.r,Local254);
+	float  Local280 = ( Local278  + Local279);
+	float  Local281 = (Local277 - Local280);
+	float  Local282 = saturate(Local281);
+	float  Local283 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local282);
+	float  Local284 = saturate(Local283);
+	float  Local285 = (1.00000000 - Local284.r.r);
+	float3  Local286 = lerp(Local225,Local272,Local285);
+	float2  Local287 = ( Local25  * (( float2 )Material.PreshaderBuffer[8].x));
+	float  Local288 =  1.0f ;
+	float4  Local289 = UnpackNormalMap(Texture2DSample(Material.Texture2D_14,GetMaterialSharedSampler(Material.Texture2D_14Sampler,View.MaterialTextureBilinearWrapedSampler), Local287 ));
+	float  Local290 =  1.0f ;
+	float3  Local291 = (Local289.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local292 = ( Local33  * (( float2 )Material.PreshaderBuffer[8].x));
 	float  Local293 =  1.0f ;
-	float4  Local294 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_15,GetMaterialSharedSampler(Material.Texture2D_15Sampler,View.MaterialTextureBilinearWrapedSampler),Local282));
+	float4  Local294 = UnpackNormalMap(Texture2DSample(Material.Texture2D_14,GetMaterialSharedSampler(Material.Texture2D_14Sampler,View.MaterialTextureBilinearWrapedSampler), Local292 ));
 	float  Local295 =  1.0f ;
-	float  Local296 =  1.0f ;
-	float4  Local297 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_15,GetMaterialSharedSampler(Material.Texture2D_15Sampler,View.MaterialTextureBilinearWrapedSampler),Local288));
-	float  Local298 =  1.0f ;
-	float3  Local299 = lerp(Local294.rgb,Local297.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local300 = (Local299.r + Local40);
-	float  Local301 = (Local300 + 1.00000000);
-	FLWCVector2 Local302 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[8].z)));
-	float2  Local303 = LWCApplyAddressMode( Local302 ,  1u ,  1u );
-	float  Local304 =  1.0f ;
-	float4  Local305 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_16,GetMaterialSharedSampler(Material.Texture2D_16Sampler,View.MaterialTextureBilinearWrapedSampler),Local303));
-	float  Local306 =  1.0f ;
-	float  Local307 = (Local43 + Local305.rgb.r);
-	float  Local308 = (Local301 - Local307);
-	float  Local309 = saturate(Local308);
-	float  Local310 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local309);
-	float  Local311 = saturate(Local310);
-	float  Local312 = (1.00000000 - Local311.r.r);
-	float3  Local313 = lerp(Local286,Local292, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local314 = (Local4.rgb * (( float3 )Local313.r));
-	float3  Local315 = (Local61.rgb * (( float3 )Local313.g));
-	float3  Local316 = (Local314 + Local315);
-	float3  Local317 = (Local0 * (( float3 )Local313.b));
-	float3  Local318 = (Local317 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local319 = (Local316 + Local318);
-	float  Local320 =  1.0f ;
-	float4  Local321 = UnpackNormalMap(Texture2DSample(Material.Texture2D_17,GetMaterialSharedSampler(Material.Texture2D_17Sampler,View.MaterialTextureBilinearWrapedSampler),Local303));
-	float  Local322 =  1.0f ;
-	float3  Local323 = (Local321.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local324 = (Local70.rgb * (( float3 )Local323.r));
-	float3  Local325 = (Local81.rgb * (( float3 )Local323.g));
-	float3  Local326 = (Local324 + Local325);
-	float3  Local327 = (Local0 * (( float3 )Local323.b));
-	float3  Local328 = (Local327 +  float3 (0.00000000,0.00000000,0.00000000));
-	float3  Local329 = (Local326 + Local328);
-	float3  Local330 = lerp(Local319,Local329, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local331 = lerp(Local267,Local273,Local279);
-	float2  Local332 = Parameters.TexCoords[1].xy;
-	float  Local333 =  Local332 .r;
-	float  Local334 = (1.00000000 -  Local333 );
-	float  Local335 = (Local331 +  Local334 );
-	float  Local336 = (Local335 + 1.00000000);
-	float  Local337 = (2.00000000 *  Local333 );
-	float  Local338 = lerp(Local299.r,Local305.rgb.r,Local312);
-	float  Local339 = ( Local337  + Local338);
-	float  Local340 = (Local336 - Local339);
-	float  Local341 = saturate(Local340);
-	float  Local342 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local341);
-	float  Local343 = saturate(Local342);
-	float  Local344 = (1.00000000 - Local343.r.r);
-	float3  Local345 = lerp(Local280,Local330,Local344);
-	FLWCVector2 Local346 = LWCMultiply( Local7 , LWCPromote((( float2 )Material.PreshaderBuffer[9].x)));
-	float2  Local347 = LWCApplyAddressMode( Local346 ,  1u ,  1u );
-	float  Local348 =  1.0f ;
-	float4  Local349 = UnpackNormalMap(Texture2DSample(Material.Texture2D_18,GetMaterialSharedSampler(Material.Texture2D_18Sampler,View.MaterialTextureBilinearWrapedSampler),Local347));
+	float3  Local296 = (Local294.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
+	float  Local297 =  1.0f ;
+	float4  Local298 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_15,GetMaterialSharedSampler(Material.Texture2D_15Sampler,View.MaterialTextureBilinearWrapedSampler), Local287 ));
+	float  Local299 =  1.0f ;
+	float  Local300 =  1.0f ;
+	float4  Local301 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_15,GetMaterialSharedSampler(Material.Texture2D_15Sampler,View.MaterialTextureBilinearWrapedSampler), Local292 ));
+	float  Local302 =  1.0f ;
+	float3  Local303 = lerp(Local298.rgb,Local301.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local304 = (Local303.r + Local56);
+	float  Local305 = (Local304 + 1.00000000);
+	float2  Local306 = ( Local60  * (( float2 )Material.PreshaderBuffer[8].z));
+	float  Local307 =  1.0f ;
+	float4  Local308 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_16,GetMaterialSharedSampler(Material.Texture2D_16Sampler,View.MaterialTextureBilinearWrapedSampler), Local306 ));
+	float  Local309 =  1.0f ;
+	float  Local310 = (Local59 + Local308.rgb.r);
+	float  Local311 = (Local305 - Local310);
+	float  Local312 = saturate(Local311);
+	float  Local313 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local312);
+	float  Local314 = saturate(Local313);
+	float  Local315 = (1.00000000 - Local314.r.r);
+	float3  Local316 = lerp(Local291,Local296, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local317 = (Local6.rgb * (( float3 )Local316.r));
+	float3  Local318 = (Local76.rgb * (( float3 )Local316.g));
+	float3  Local319 = (Local317 + Local318);
+	float3  Local320 = (Local2 * (( float3 )Local316.b));
+	float3  Local321 = (Local320 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local322 = (Local319 + Local321);
+	float  Local323 =  1.0f ;
+	float4  Local324 = UnpackNormalMap(Texture2DSample(Material.Texture2D_17,GetMaterialSharedSampler(Material.Texture2D_17Sampler,View.MaterialTextureBilinearWrapedSampler), Local306 ));
+	float  Local325 =  1.0f ;
+	float3  Local326 = (Local324.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local327 = (Local85.rgb * (( float3 )Local326.r));
+	float3  Local328 = (Local96.rgb * (( float3 )Local326.g));
+	float3  Local329 = (Local327 + Local328);
+	float3  Local330 = (Local2 * (( float3 )Local326.b));
+	float3  Local331 = (Local330 +  float3 (0.00000000,0.00000000,0.00000000));
+	float3  Local332 = (Local329 + Local331);
+	float3  Local333 = lerp(Local322,Local332, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local334 = lerp(Local273,Local279,Local285);
+	float2  Local335 = Parameters.TexCoords[1].xy;
+	float  Local336 =  Local335 .r;
+	float  Local337 = (1.00000000 -  Local336 );
+	float  Local338 = (Local334 +  Local337 );
+	float  Local339 = (Local338 + 1.00000000);
+	float  Local340 = (2.00000000 *  Local336 );
+	float  Local341 = lerp(Local303.r,Local308.rgb.r,Local315);
+	float  Local342 = ( Local340  + Local341);
+	float  Local343 = (Local339 - Local342);
+	float  Local344 = saturate(Local343);
+	float  Local345 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local344);
+	float  Local346 = saturate(Local345);
+	float  Local347 = (1.00000000 - Local346.r.r);
+	float3  Local348 = lerp(Local286,Local333,Local347);
+	float2  Local349 = ( Local25  * (( float2 )Material.PreshaderBuffer[9].x));
 	float  Local350 =  1.0f ;
-	float3  Local351 = (Local349.rgb *  float3 ( float2 (Local14,-1.00000000),1.00000000));
-	FLWCVector2 Local352 = LWCMultiply( Local16 , LWCPromote((( float2 )Material.PreshaderBuffer[9].x)));
-	float2  Local353 = LWCApplyAddressMode( Local352 ,  1u ,  1u );
-	float  Local354 =  1.0f ;
-	float4  Local355 = UnpackNormalMap(Texture2DSample(Material.Texture2D_18,GetMaterialSharedSampler(Material.Texture2D_18Sampler,View.MaterialTextureBilinearWrapedSampler),Local353));
-	float  Local356 =  1.0f ;
-	float3  Local357 = (Local355.rgb *  float3 ( float2 (Local23,-1.00000000),1.00000000));
-	float  Local358 =  1.0f ;
-	float4  Local359 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_19,GetMaterialSharedSampler(Material.Texture2D_19Sampler,View.MaterialTextureBilinearWrapedSampler),Local347));
-	float  Local360 =  1.0f ;
+	float4  Local351 = UnpackNormalMap(Texture2DSample(Material.Texture2D_18,GetMaterialSharedSampler(Material.Texture2D_18Sampler,View.MaterialTextureBilinearWrapedSampler), Local349 ));
+	float  Local352 =  1.0f ;
+	float3  Local353 = (Local351.rgb *  float3 ( float2 (Local31,-1.00000000),1.00000000));
+	float2  Local354 = ( Local33  * (( float2 )Material.PreshaderBuffer[9].x));
+	float  Local355 =  1.0f ;
+	float4  Local356 = UnpackNormalMap(Texture2DSample(Material.Texture2D_18,GetMaterialSharedSampler(Material.Texture2D_18Sampler,View.MaterialTextureBilinearWrapedSampler), Local354 ));
+	float  Local357 =  1.0f ;
+	float3  Local358 = (Local356.rgb *  float3 ( float2 (Local39,-1.00000000),1.00000000));
+	float  Local359 =  1.0f ;
+	float4  Local360 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_19,GetMaterialSharedSampler(Material.Texture2D_19Sampler,View.MaterialTextureBilinearWrapedSampler), Local349 ));
 	float  Local361 =  1.0f ;
-	float4  Local362 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_19,GetMaterialSharedSampler(Material.Texture2D_19Sampler,View.MaterialTextureBilinearWrapedSampler),Local353));
-	float  Local363 =  1.0f ;
-	float3  Local364 = lerp(Local359.rgb,Local362.rgb, float3 ( float2 (Local27.r,Local30.r),Local32).r);
-	float  Local365 = (Local364.r + Local40);
-	float  Local366 = (Local365 + 1.00000000);
-	FLWCVector2 Local367 = LWCMultiply( Local44 , LWCPromote((( float2 )Material.PreshaderBuffer[9].z)));
-	float2  Local368 = LWCApplyAddressMode( Local367 ,  1u ,  1u );
+	float  Local362 =  1.0f ;
+	float4  Local363 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_19,GetMaterialSharedSampler(Material.Texture2D_19Sampler,View.MaterialTextureBilinearWrapedSampler), Local354 ));
+	float  Local364 =  1.0f ;
+	float3  Local365 = lerp(Local360.rgb,Local363.rgb, float3 ( float2 (Local43.r,Local46.r),Local48).r);
+	float  Local366 = (Local365.r + Local56);
+	float  Local367 = (Local366 + 1.00000000);
+	float2  Local368 = ( Local60  * (( float2 )Material.PreshaderBuffer[9].z));
 	float  Local369 =  1.0f ;
-	float4  Local370 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_20,GetMaterialSharedSampler(Material.Texture2D_20Sampler,View.MaterialTextureBilinearWrapedSampler),Local368));
+	float4  Local370 = ProcessMaterialAlphaTextureLookup(Texture2DSample(Material.Texture2D_20,GetMaterialSharedSampler(Material.Texture2D_20Sampler,View.MaterialTextureBilinearWrapedSampler), Local368 ));
 	float  Local371 =  1.0f ;
-	float  Local372 = (Local43 + Local370.rgb.r);
-	float  Local373 = (Local366 - Local372);
+	float  Local372 = (Local59 + Local370.rgb.r);
+	float  Local373 = (Local367 - Local372);
 	float  Local374 = saturate(Local373);
 	float  Local375 = lerp(Material.PreshaderBuffer[4].y,Material.PreshaderBuffer[4].x,Local374);
 	float  Local376 = saturate(Local375);
 	float  Local377 = (1.00000000 - Local376.r.r);
-	float3  Local378 = lerp(Local351,Local357, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
-	float3  Local379 = (Local4.rgb * (( float3 )Local378.r));
-	float3  Local380 = (Local61.rgb * (( float3 )Local378.g));
+	float3  Local378 = lerp(Local353,Local358, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
+	float3  Local379 = (Local6.rgb * (( float3 )Local378.r));
+	float3  Local380 = (Local76.rgb * (( float3 )Local378.g));
 	float3  Local381 = (Local379 + Local380);
-	float3  Local382 = (Local0 * (( float3 )Local378.b));
+	float3  Local382 = (Local2 * (( float3 )Local378.b));
 	float3  Local383 = (Local382 +  float3 (0.00000000,0.00000000,0.00000000));
 	float3  Local384 = (Local381 + Local383);
 	float  Local385 =  1.0f ;
-	float4  Local386 = UnpackNormalMap(Texture2DSample(Material.Texture2D_21,GetMaterialSharedSampler(Material.Texture2D_21Sampler,View.MaterialTextureBilinearWrapedSampler),Local368));
+	float4  Local386 = UnpackNormalMap(Texture2DSample(Material.Texture2D_21,GetMaterialSharedSampler(Material.Texture2D_21Sampler,View.MaterialTextureBilinearWrapedSampler), Local368 ));
 	float  Local387 =  1.0f ;
-	float3  Local388 = (Local386.rgb *  float3 ( float2 (Local75,-1.00000000),1.00000000));
-	float3  Local389 = (Local70.rgb * (( float3 )Local388.r));
-	float3  Local390 = (Local81.rgb * (( float3 )Local388.g));
+	float3  Local388 = (Local386.rgb *  float3 ( float2 (Local90,-1.00000000),1.00000000));
+	float3  Local389 = (Local85.rgb * (( float3 )Local388.r));
+	float3  Local390 = (Local96.rgb * (( float3 )Local388.g));
 	float3  Local391 = (Local389 + Local390);
-	float3  Local392 = (Local0 * (( float3 )Local388.b));
+	float3  Local392 = (Local2 * (( float3 )Local388.b));
 	float3  Local393 = (Local392 +  float3 (0.00000000,0.00000000,0.00000000));
 	float3  Local394 = (Local391 + Local393);
-	float3  Local395 = lerp(Local384,Local394, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local396 = lerp(Local331,Local338,Local344);
-	float  Local397 =  Local332 .g;
+	float3  Local395 = lerp(Local384,Local394, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local396 = lerp(Local334,Local341,Local347);
+	float  Local397 =  Local335 .g;
 	float  Local398 = (1.00000000 -  Local397 );
 	float  Local399 = (Local396 +  Local398 );
 	float  Local400 = (Local399 + 1.00000000);
 	float  Local401 = (2.00000000 *  Local397 );
-	float  Local402 = lerp(Local364.r,Local370.rgb.r,Local377);
+	float  Local402 = lerp(Local365.r,Local370.rgb.r,Local377);
 	float  Local403 = ( Local401  + Local402);
 	float  Local404 = (Local400 - Local403);
 	float  Local405 = saturate(Local404);
 	float  Local406 = lerp(Material.PreshaderBuffer[6].x,Material.PreshaderBuffer[5].w,Local405);
 	float  Local407 = saturate(Local406);
 	float  Local408 = (1.00000000 - Local407.r.r);
-	float3  Local409 = lerp(Local345,Local395,Local408);
+	float3  Local409 = lerp(Local348,Local395,Local408);
 	float  Local410 = lerp(Local396,Local402,Local408);
 	float  Local411 = (1.00000000 - Local410);
 	float  Local412 = (Local411 - 1.00000000);
-	float  Local413 =  Local139 .a;
+	float  Local413 =  Local151 .a;
 	float  Local414 = ( Local413  * 2.00000000);
 	float  Local415 = (Local412 +  Local414 );
 	float  Local416 = saturate(Local415);
@@ -16633,11 +16707,11 @@ void CalcPixelMaterialInputs(in out FMaterialPixelParameters Parameters, in out 
 
 
 	PixelMaterialInputs.Normal = Local421;
-#line 3643 "/Engine/Generated/Material.ush"
+#line 3717 "/Engine/Generated/Material.ush"
 	float3 MaterialNormal = GetMaterialNormal(Parameters, PixelMaterialInputs);
-#line 3658 "/Engine/Generated/Material.ush"
+#line 3732 "/Engine/Generated/Material.ush"
 	Parameters.WorldNormal = normalize(MaterialNormal);
-#line 3667 "/Engine/Generated/Material.ush"
+#line 3741 "/Engine/Generated/Material.ush"
 	Parameters.ReflectionVector = ReflectionAboutCustomWorldNormal(Parameters, Parameters.WorldNormal, false);
 
 
@@ -16647,152 +16721,152 @@ void CalcPixelMaterialInputs(in out FMaterialPixelParameters Parameters, in out 
 
 	float3  Local422 = lerp( float3 (0.00000000,0.00000000,0.00000000),Material.PreshaderBuffer[11].xyz,Material.PreshaderBuffer[10].w);
 	float  Local423 =  1.0f ;
-	float4  Local424 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_22,GetMaterialSharedSampler(Material.Texture2D_22Sampler,View.MaterialTextureBilinearWrapedSampler),Local9));
+	float4  Local424 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_22,GetMaterialSharedSampler(Material.Texture2D_22Sampler,View.MaterialTextureBilinearWrapedSampler), Local26 ));
 	float  Local425 =  1.0f ;
 	float  Local426 =  1.0f ;
-	float4  Local427 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_22,GetMaterialSharedSampler(Material.Texture2D_22Sampler,View.MaterialTextureBilinearWrapedSampler),Local18));
+	float4  Local427 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_22,GetMaterialSharedSampler(Material.Texture2D_22Sampler,View.MaterialTextureBilinearWrapedSampler), Local34 ));
 	float  Local428 =  1.0f ;
-	float3  Local429 = lerp(Local424.rgb,Local427.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local429 = lerp(Local424.rgb,Local427.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local430 =  1.0f ;
-	float4  Local431 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_23,GetMaterialSharedSampler(Material.Texture2D_23Sampler,View.MaterialTextureBilinearWrapedSampler),Local46));
+	float4  Local431 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_23,GetMaterialSharedSampler(Material.Texture2D_23Sampler,View.MaterialTextureBilinearWrapedSampler), Local61 ));
 	float  Local432 =  1.0f ;
-	float3  Local433 = lerp(Local429,Local431.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
+	float3  Local433 = lerp(Local429,Local431.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
 	float  Local434 =  1.0f ;
-	float4  Local435 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_24,GetMaterialSharedSampler(Material.Texture2D_24Sampler,View.MaterialTextureBilinearWrapedSampler),Local89));
+	float4  Local435 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_24,GetMaterialSharedSampler(Material.Texture2D_24Sampler,View.MaterialTextureBilinearWrapedSampler), Local103 ));
 	float  Local436 =  1.0f ;
 	float  Local437 =  1.0f ;
-	float4  Local438 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_24,GetMaterialSharedSampler(Material.Texture2D_24Sampler,View.MaterialTextureBilinearWrapedSampler),Local95));
+	float4  Local438 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_24,GetMaterialSharedSampler(Material.Texture2D_24Sampler,View.MaterialTextureBilinearWrapedSampler), Local108 ));
 	float  Local439 =  1.0f ;
-	float3  Local440 = lerp(Local435.rgb,Local438.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local440 = lerp(Local435.rgb,Local438.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local441 =  1.0f ;
-	float4  Local442 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_25,GetMaterialSharedSampler(Material.Texture2D_25Sampler,View.MaterialTextureBilinearWrapedSampler),Local110));
+	float4  Local442 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_25,GetMaterialSharedSampler(Material.Texture2D_25Sampler,View.MaterialTextureBilinearWrapedSampler), Local122 ));
 	float  Local443 =  1.0f ;
-	float3  Local444 = lerp(Local440,Local442.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float3  Local445 = lerp(Local433,Local444,Local151);
+	float3  Local444 = lerp(Local440,Local442.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float3  Local445 = lerp(Local433,Local444,Local163);
 	float  Local446 =  1.0f ;
-	float4  Local447 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_26,GetMaterialSharedSampler(Material.Texture2D_26Sampler,View.MaterialTextureBilinearWrapedSampler),Local154));
+	float4  Local447 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_26,GetMaterialSharedSampler(Material.Texture2D_26Sampler,View.MaterialTextureBilinearWrapedSampler), Local165 ));
 	float  Local448 =  1.0f ;
 	float  Local449 =  1.0f ;
-	float4  Local450 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_26,GetMaterialSharedSampler(Material.Texture2D_26Sampler,View.MaterialTextureBilinearWrapedSampler),Local160));
+	float4  Local450 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_26,GetMaterialSharedSampler(Material.Texture2D_26Sampler,View.MaterialTextureBilinearWrapedSampler), Local170 ));
 	float  Local451 =  1.0f ;
-	float3  Local452 = lerp(Local447.rgb,Local450.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local452 = lerp(Local447.rgb,Local450.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local453 =  1.0f ;
-	float4  Local454 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_27,GetMaterialSharedSampler(Material.Texture2D_27Sampler,View.MaterialTextureBilinearWrapedSampler),Local175));
+	float4  Local454 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_27,GetMaterialSharedSampler(Material.Texture2D_27Sampler,View.MaterialTextureBilinearWrapedSampler), Local184 ));
 	float  Local455 =  1.0f ;
-	float3  Local456 = lerp(Local452,Local454.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float3  Local457 = lerp(Local445,Local456,Local215);
+	float3  Local456 = lerp(Local452,Local454.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float3  Local457 = lerp(Local445,Local456,Local224);
 	float  Local458 =  1.0f ;
-	float4  Local459 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler),Local218));
+	float4  Local459 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler), Local226 ));
 	float  Local460 =  1.0f ;
 	float  Local461 =  1.0f ;
-	float4  Local462 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler),Local224));
+	float4  Local462 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler), Local231 ));
 	float  Local463 =  1.0f ;
-	float3  Local464 = lerp(Local459.rgb,Local462.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local464 = lerp(Local459.rgb,Local462.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local465 =  1.0f ;
-	float4  Local466 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler),Local239));
+	float4  Local466 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_28,GetMaterialSharedSampler(Material.Texture2D_28Sampler,View.MaterialTextureBilinearWrapedSampler), Local245 ));
 	float  Local467 =  1.0f ;
-	float3  Local468 = lerp(Local464,Local466.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float3  Local469 = lerp(Local457,Local468,Local279);
+	float3  Local468 = lerp(Local464,Local466.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float3  Local469 = lerp(Local457,Local468,Local285);
 	float  Local470 =  1.0f ;
-	float4  Local471 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_29,GetMaterialSharedSampler(Material.Texture2D_29Sampler,View.MaterialTextureBilinearWrapedSampler),Local282));
+	float4  Local471 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_29,GetMaterialSharedSampler(Material.Texture2D_29Sampler,View.MaterialTextureBilinearWrapedSampler), Local287 ));
 	float  Local472 =  1.0f ;
 	float  Local473 =  1.0f ;
-	float4  Local474 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_29,GetMaterialSharedSampler(Material.Texture2D_29Sampler,View.MaterialTextureBilinearWrapedSampler),Local288));
+	float4  Local474 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_29,GetMaterialSharedSampler(Material.Texture2D_29Sampler,View.MaterialTextureBilinearWrapedSampler), Local292 ));
 	float  Local475 =  1.0f ;
-	float3  Local476 = lerp(Local471.rgb,Local474.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local476 = lerp(Local471.rgb,Local474.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local477 =  1.0f ;
-	float4  Local478 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_30,GetMaterialSharedSampler(Material.Texture2D_30Sampler,View.MaterialTextureBilinearWrapedSampler),Local303));
+	float4  Local478 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_30,GetMaterialSharedSampler(Material.Texture2D_30Sampler,View.MaterialTextureBilinearWrapedSampler), Local306 ));
 	float  Local479 =  1.0f ;
-	float3  Local480 = lerp(Local476,Local478.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float3  Local481 = lerp(Local469,Local480,Local344);
+	float3  Local480 = lerp(Local476,Local478.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float3  Local481 = lerp(Local469,Local480,Local347);
 	float  Local482 =  1.0f ;
-	float4  Local483 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_31,GetMaterialSharedSampler(Material.Texture2D_31Sampler,View.MaterialTextureBilinearWrapedSampler),Local347));
+	float4  Local483 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_31,GetMaterialSharedSampler(Material.Texture2D_31Sampler,View.MaterialTextureBilinearWrapedSampler), Local349 ));
 	float  Local484 =  1.0f ;
 	float  Local485 =  1.0f ;
-	float4  Local486 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_31,GetMaterialSharedSampler(Material.Texture2D_31Sampler,View.MaterialTextureBilinearWrapedSampler),Local353));
+	float4  Local486 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_31,GetMaterialSharedSampler(Material.Texture2D_31Sampler,View.MaterialTextureBilinearWrapedSampler), Local354 ));
 	float  Local487 =  1.0f ;
-	float3  Local488 = lerp(Local483.rgb,Local486.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local488 = lerp(Local483.rgb,Local486.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local489 =  1.0f ;
-	float4  Local490 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_32,GetMaterialSharedSampler(Material.Texture2D_32Sampler,View.MaterialTextureBilinearWrapedSampler),Local368));
+	float4  Local490 = ProcessMaterialColorTextureLookup(Texture2DSample(Material.Texture2D_32,GetMaterialSharedSampler(Material.Texture2D_32Sampler,View.MaterialTextureBilinearWrapedSampler), Local368 ));
 	float  Local491 =  1.0f ;
-	float3  Local492 = lerp(Local488,Local490.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
+	float3  Local492 = lerp(Local488,Local490.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
 	float3  Local493 = lerp(Local481,Local492,Local408);
 	float  Local494 =  1.0f ;
-	float4  Local495 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_33,GetMaterialSharedSampler(Material.Texture2D_33Sampler,View.MaterialTextureBilinearWrapedSampler),Local9));
+	float4  Local495 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_33,GetMaterialSharedSampler(Material.Texture2D_33Sampler,View.MaterialTextureBilinearWrapedSampler), Local26 ));
 	float  Local496 =  1.0f ;
 	float  Local497 =  1.0f ;
-	float4  Local498 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_33,GetMaterialSharedSampler(Material.Texture2D_33Sampler,View.MaterialTextureBilinearWrapedSampler),Local18));
+	float4  Local498 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_33,GetMaterialSharedSampler(Material.Texture2D_33Sampler,View.MaterialTextureBilinearWrapedSampler), Local34 ));
 	float  Local499 =  1.0f ;
-	float3  Local500 = lerp(Local495.rgb,Local498.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local500 = lerp(Local495.rgb,Local498.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local501 =  1.0f ;
-	float4  Local502 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_34,GetMaterialSharedSampler(Material.Texture2D_34Sampler,View.MaterialTextureBilinearWrapedSampler),Local46));
+	float4  Local502 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_34,GetMaterialSharedSampler(Material.Texture2D_34Sampler,View.MaterialTextureBilinearWrapedSampler), Local61 ));
 	float  Local503 =  1.0f ;
-	float3  Local504 = lerp(Local500,Local502.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local55), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
+	float3  Local504 = lerp(Local500,Local502.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local70), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
 	float  Local505 =  1.0f ;
-	float4  Local506 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_35,GetMaterialSharedSampler(Material.Texture2D_35Sampler,View.MaterialTextureBilinearWrapedSampler),Local89));
+	float4  Local506 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_35,GetMaterialSharedSampler(Material.Texture2D_35Sampler,View.MaterialTextureBilinearWrapedSampler), Local103 ));
 	float  Local507 =  1.0f ;
 	float  Local508 =  1.0f ;
-	float4  Local509 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_35,GetMaterialSharedSampler(Material.Texture2D_35Sampler,View.MaterialTextureBilinearWrapedSampler),Local95));
+	float4  Local509 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_35,GetMaterialSharedSampler(Material.Texture2D_35Sampler,View.MaterialTextureBilinearWrapedSampler), Local108 ));
 	float  Local510 =  1.0f ;
-	float3  Local511 = lerp(Local506.rgb,Local509.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local511 = lerp(Local506.rgb,Local509.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local512 =  1.0f ;
-	float4  Local513 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_36,GetMaterialSharedSampler(Material.Texture2D_36Sampler,View.MaterialTextureBilinearWrapedSampler),Local110));
+	float4  Local513 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_36,GetMaterialSharedSampler(Material.Texture2D_36Sampler,View.MaterialTextureBilinearWrapedSampler), Local122 ));
 	float  Local514 =  1.0f ;
-	float3  Local515 = lerp(Local511,Local513.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local119), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local516 = lerp(Local504.b,Local515.b,Local151);
+	float3  Local515 = lerp(Local511,Local513.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local131), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local516 = lerp(Local504.b,Local515.b,Local163);
 	float  Local517 =  1.0f ;
-	float4  Local518 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_37,GetMaterialSharedSampler(Material.Texture2D_37Sampler,View.MaterialTextureBilinearWrapedSampler),Local154));
+	float4  Local518 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_37,GetMaterialSharedSampler(Material.Texture2D_37Sampler,View.MaterialTextureBilinearWrapedSampler), Local165 ));
 	float  Local519 =  1.0f ;
 	float  Local520 =  1.0f ;
-	float4  Local521 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_37,GetMaterialSharedSampler(Material.Texture2D_37Sampler,View.MaterialTextureBilinearWrapedSampler),Local160));
+	float4  Local521 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_37,GetMaterialSharedSampler(Material.Texture2D_37Sampler,View.MaterialTextureBilinearWrapedSampler), Local170 ));
 	float  Local522 =  1.0f ;
-	float3  Local523 = lerp(Local518.rgb,Local521.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local523 = lerp(Local518.rgb,Local521.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local524 =  1.0f ;
-	float4  Local525 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_38,GetMaterialSharedSampler(Material.Texture2D_38Sampler,View.MaterialTextureBilinearWrapedSampler),Local175));
+	float4  Local525 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_38,GetMaterialSharedSampler(Material.Texture2D_38Sampler,View.MaterialTextureBilinearWrapedSampler), Local184 ));
 	float  Local526 =  1.0f ;
-	float3  Local527 = lerp(Local523,Local525.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local184), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local528 = lerp(Local516,Local527.b,Local215);
+	float3  Local527 = lerp(Local523,Local525.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local193), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local528 = lerp(Local516,Local527.b,Local224);
 	float  Local529 =  1.0f ;
-	float4  Local530 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler),Local218));
+	float4  Local530 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler), Local226 ));
 	float  Local531 =  1.0f ;
 	float  Local532 =  1.0f ;
-	float4  Local533 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler),Local224));
+	float4  Local533 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler), Local231 ));
 	float  Local534 =  1.0f ;
-	float3  Local535 = lerp(Local530.rgb,Local533.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local535 = lerp(Local530.rgb,Local533.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local536 =  1.0f ;
-	float4  Local537 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler),Local239));
+	float4  Local537 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_39,GetMaterialSharedSampler(Material.Texture2D_39Sampler,View.MaterialTextureBilinearWrapedSampler), Local245 ));
 	float  Local538 =  1.0f ;
-	float3  Local539 = lerp(Local535,Local537.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local248), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local540 = lerp(Local528,Local539.b,Local279);
+	float3  Local539 = lerp(Local535,Local537.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local254), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local540 = lerp(Local528,Local539.b,Local285);
 	float  Local541 =  1.0f ;
-	float4  Local542 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_40,GetMaterialSharedSampler(Material.Texture2D_40Sampler,View.MaterialTextureBilinearWrapedSampler),Local282));
+	float4  Local542 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_40,GetMaterialSharedSampler(Material.Texture2D_40Sampler,View.MaterialTextureBilinearWrapedSampler), Local287 ));
 	float  Local543 =  1.0f ;
 	float  Local544 =  1.0f ;
-	float4  Local545 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_40,GetMaterialSharedSampler(Material.Texture2D_40Sampler,View.MaterialTextureBilinearWrapedSampler),Local288));
+	float4  Local545 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_40,GetMaterialSharedSampler(Material.Texture2D_40Sampler,View.MaterialTextureBilinearWrapedSampler), Local292 ));
 	float  Local546 =  1.0f ;
-	float3  Local547 = lerp(Local542.rgb,Local545.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local547 = lerp(Local542.rgb,Local545.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local548 =  1.0f ;
-	float4  Local549 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_41,GetMaterialSharedSampler(Material.Texture2D_41Sampler,View.MaterialTextureBilinearWrapedSampler),Local303));
+	float4  Local549 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_41,GetMaterialSharedSampler(Material.Texture2D_41Sampler,View.MaterialTextureBilinearWrapedSampler), Local306 ));
 	float  Local550 =  1.0f ;
-	float3  Local551 = lerp(Local547,Local549.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local312), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
-	float  Local552 = lerp(Local540,Local551.b,Local344);
+	float3  Local551 = lerp(Local547,Local549.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local315), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
+	float  Local552 = lerp(Local540,Local551.b,Local347);
 	float  Local553 =  1.0f ;
-	float4  Local554 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_42,GetMaterialSharedSampler(Material.Texture2D_42Sampler,View.MaterialTextureBilinearWrapedSampler),Local347));
+	float4  Local554 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_42,GetMaterialSharedSampler(Material.Texture2D_42Sampler,View.MaterialTextureBilinearWrapedSampler), Local349 ));
 	float  Local555 =  1.0f ;
 	float  Local556 =  1.0f ;
-	float4  Local557 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_42,GetMaterialSharedSampler(Material.Texture2D_42Sampler,View.MaterialTextureBilinearWrapedSampler),Local353));
+	float4  Local557 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_42,GetMaterialSharedSampler(Material.Texture2D_42Sampler,View.MaterialTextureBilinearWrapedSampler), Local354 ));
 	float  Local558 =  1.0f ;
-	float3  Local559 = lerp(Local554.rgb,Local557.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).r);
+	float3  Local559 = lerp(Local554.rgb,Local557.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).r);
 	float  Local560 =  1.0f ;
-	float4  Local561 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_43,GetMaterialSharedSampler(Material.Texture2D_43Sampler,View.MaterialTextureBilinearWrapedSampler),Local368));
+	float4  Local561 = ProcessMaterialLinearColorTextureLookup(Texture2DSample(Material.Texture2D_43,GetMaterialSharedSampler(Material.Texture2D_43Sampler,View.MaterialTextureBilinearWrapedSampler), Local368 ));
 	float  Local562 =  1.0f ;
-	float3  Local563 = lerp(Local559,Local561.rgb, float3 ( float2 ( float3 ( float2 (Local27.r,Local30.r),Local32).r,Local377), float3 ( float2 (Local27.r,Local30.r),Local32).b).g);
+	float3  Local563 = lerp(Local559,Local561.rgb, float3 ( float2 ( float3 ( float2 (Local43.r,Local46.r),Local48).r,Local377), float3 ( float2 (Local43.r,Local46.r),Local48).b).g);
 	float  Local564 = lerp(Local552,Local563.b,Local408);
 	float  Local565 = (1.00000000 - Local418.r.r);
-	float  Local566 = lerp(Local504.g,Local515.g,Local151);
-	float  Local567 = lerp(Local566,Local527.g,Local215);
-	float  Local568 = lerp(Local567,Local539.g,Local279);
-	float  Local569 = lerp(Local568,Local551.g,Local344);
+	float  Local566 = lerp(Local504.g,Local515.g,Local163);
+	float  Local567 = lerp(Local566,Local527.g,Local224);
+	float  Local568 = lerp(Local567,Local539.g,Local285);
+	float  Local569 = lerp(Local568,Local551.g,Local347);
 	float  Local570 = lerp(Local569,Local563.g,Local408);
 	float  Local571 = (Local565 * Local570);
 	float  Local572 = (Material.PreshaderBuffer[12].x - View.GameTime);
@@ -16813,10 +16887,10 @@ void CalcPixelMaterialInputs(in out FMaterialPixelParameters Parameters, in out 
 	float  Local587 = (Local586 / 6.00000000);
 	float  Local588 = ( Local576  + Local587);
 	float  Local589 = (Local588 + -0.50000000);
-	float  Local590 = lerp(Local504.r,Local515.r,Local151);
-	float  Local591 = lerp(Local590,Local527.r,Local215);
-	float  Local592 = lerp(Local591,Local539.r,Local279);
-	float  Local593 = lerp(Local592,Local551.r,Local344);
+	float  Local590 = lerp(Local504.r,Local515.r,Local163);
+	float  Local591 = lerp(Local590,Local527.r,Local224);
+	float  Local592 = lerp(Local591,Local539.r,Local285);
+	float  Local593 = lerp(Local592,Local551.r,Local347);
 	float  Local594 = lerp(Local593,Local563.r,Local408);
 
 	PixelMaterialInputs.EmissiveColor = Local422;
