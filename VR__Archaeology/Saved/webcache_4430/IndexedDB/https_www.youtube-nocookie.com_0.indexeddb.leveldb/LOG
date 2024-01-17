@@ -1,6 +1,0 @@
-2023/12/28-01:10:26.677 6744 Creating DB C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb since it was missing.
-2023/12/28-01:10:26.686 6744 Reusing MANIFEST C:/Users/Miray/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/12/28-01:19:30.989 30a4 Level-0 table #5: started
-2023/12/28-01:19:30.997 30a4 Level-0 table #5: 1167 bytes OK
-2023/12/28-01:19:30.999 30a4 Delete type=0 #3
-2023/12/28-01:19:30.999 30a4 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
