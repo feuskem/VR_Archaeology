@@ -1,0 +1,26 @@
+[0118/022312.678:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
+[0118/022510.100:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
+[0118/031212.353:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031212.370:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031258.206:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031258.217:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031303.218:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031303.220:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031308.223:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031308.231:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031313.253:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031313.255:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031329.853:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031329.879:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031354.926:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031354.940:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031359.944:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031359.945:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031404.948:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031404.962:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031521.561:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031521.561:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031526.565:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031526.578:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031531.567:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
+[0118/031531.584:WARNING:dns_config_service_win.cc(712)] Failed to read DnsConfig.
