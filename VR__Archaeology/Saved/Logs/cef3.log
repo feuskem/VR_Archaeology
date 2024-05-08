@@ -1,2 +1,30 @@
-[0118/033852.842:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0118/034049.056:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
+[0508/070037.854:ERROR:os_crypt_win.cc(93)] Failed to decrypt: Belirtilen durumda kullaným için anahtar geçerli deðil. (0x8009000B)
+[0508/070040.979:ERROR:backend_impl.cc(1041)] Critical error found -8
+[0508/070040.980:ERROR:entry_impl.cc(1075)] No file for c1030008
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.980:ERROR:entry_impl.cc(1075)] No file for c1030004
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.980:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:ERROR:entry_impl.cc(1075)] No file for c1030006
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:ERROR:entry_impl.cc(1075)] No file for c1030000
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:ERROR:entry_impl.cc(1075)] No file for c1030002
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070040.981:WARNING:storage_block-inl.h(146)] Failed data load.
+[0508/070044.032:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
+[0508/070238.102:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
