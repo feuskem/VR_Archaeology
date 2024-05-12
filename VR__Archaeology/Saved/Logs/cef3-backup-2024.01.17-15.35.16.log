@@ -1,15 +1,0 @@
-[0117/182702.661:ERROR:os_crypt_win.cc(93)] Failed to decrypt: Key not valid for use in specified state. (0x8009000B)
-[0117/182704.587:ERROR:backend_impl.cc(1041)] Critical error found -8
-[0117/182705.250:WARNING:storage_block-inl.h(146)] Failed data load.
-[0117/182705.251:WARNING:storage_block-inl.h(146)] Failed data load.
-[0117/182705.251:WARNING:storage_block-inl.h(146)] Failed data load.
-[0117/182705.251:WARNING:storage_block-inl.h(146)] Failed data load.
-[0117/182705.252:ERROR:entry_impl.cc(998)] Failed to save user data
-[0117/182705.252:ERROR:entry_impl.cc(998)] Failed to save user data
-[0117/182707.978:WARNING:value_store_frontend.cc(45)] Reading mhjfbmdgcfjbbpaeojofohoefgiehjai.alarms from  failed: IO error: .../MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0117/182808.600:ERROR:leveldb_factory.cc(91)] Failed to open LevelDB database from C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb,IO error: C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb/MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0117/182808.606:ERROR:leveldb_factory.cc(91)] Failed to open LevelDB database from C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb,IO error: C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb/MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0117/182809.551:ERROR:leveldb_factory.cc(91)] Failed to open LevelDB database from C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb,IO error: C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb/MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0117/182809.557:ERROR:leveldb_factory.cc(91)] Failed to open LevelDB database from C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb,IO error: C:/Users/zenga/Documents/GitHub/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\IndexedDB\https_www.youtube-nocookie.com_0.indexeddb.leveldb/MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::1)
-[0117/182902.913:ERROR:gpu_init.cc(426)] Passthrough is not supported, GL is disabled
-[0117/183516.612:ERROR:command_buffer_proxy_impl.cc(121)] ContextResult::kTransientFailure: Failed to send GpuChannelMsg_CreateCommandBuffer.
