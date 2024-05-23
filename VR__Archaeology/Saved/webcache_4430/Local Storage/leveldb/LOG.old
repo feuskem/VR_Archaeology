@@ -1,3 +1,5 @@
-2024/05/15-23:48:08.447 60d4 Reusing MANIFEST C:/Users/sugur/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/MANIFEST-000001
-2024/05/15-23:48:08.448 60d4 Recovering log #3
-2024/05/15-23:48:08.448 60d4 Reusing old log C:/Users/sugur/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/000003.log 
+2024/05/18-18:23:48.266 5ab8 Reusing MANIFEST C:/Users/sugur/VR_Archaeology/VR__Archaeology/Saved/webcache_4430\Local Storage\leveldb/MANIFEST-000001
+2024/05/18-18:23:48.267 5ab8 Recovering log #3
+2024/05/18-18:23:48.267 5ab8 Level-0 table #3: started
+2024/05/18-18:23:48.270 5ab8 Level-0 table #3: 17536 bytes OK
+2024/05/18-18:23:48.271 5ab8 Delete type=0 #3
